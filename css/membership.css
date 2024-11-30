@@ -1,0 +1,304 @@
+/* Membership Hero Section */
+.membership-hero {
+    text-align: center;
+    padding: calc(var(--section-spacing) * 1.2) var(--content-padding);
+    background: var(--hero-gradient);
+    color: white;
+    position: relative;
+    overflow: hidden;
+}
+
+.membership-hero::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: radial-gradient(circle, rgba(142, 84, 233, 0.1) 0%, transparent 50%);
+    animation: rotate 20s linear infinite;
+}
+
+.membership-hero h1 {
+    font-size: var(--h1);
+    margin-bottom: var(--space-3);
+    position: relative;
+    animation: fadeIn 1s var(--animation-timing);
+    background: linear-gradient(135deg, #fff, var(--primary-light));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.membership-hero p {
+    font-size: var(--h3);
+    max-width: 600px;
+    margin: 0 auto;
+    position: relative;
+    animation: slideUp 1s var(--animation-timing);
+    color: var(--primary-light);
+}
+
+/* Membership Plans Section */
+.membership-plans {
+    display: flex;
+    justify-content: center;
+    gap: var(--space-4);
+    padding: var(--section-spacing) var(--content-padding);
+    flex-wrap: wrap;
+    position: relative;
+}
+
+.plan-card {
+    background: var(--card-gradient);
+    border-radius: var(--border-radius-xl);
+    padding: var(--space-4);
+    box-shadow: var(--shadow-lg);
+    width: 350px;
+    position: relative;
+    transition: all var(--transition-normal);
+    border: 1px solid rgba(142, 84, 233, 0.1);
+    display: flex;
+    flex-direction: column;
+}
+
+.plan-card:hover {
+    transform: translateY(-8px);
+    box-shadow: var(--shadow-xl), var(--shadow-glow);
+}
+
+.plan-card.featured {
+    border: 2px solid transparent;
+    background: linear-gradient(white, white) padding-box,
+                var(--accent-gradient) border-box;
+    transform: scale(1.05);
+}
+
+.plan-card.featured:hover {
+    transform: scale(1.05) translateY(-8px);
+}
+
+.featured-badge {
+    position: absolute;
+    top: -15px;
+    right: 20px;
+    background: var(--accent-gradient);
+    color: white;
+    padding: var(--space-2) var(--space-3);
+    border-radius: var(--border-radius-xl);
+    font-size: var(--small);
+    font-family: var(--font-mono);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    box-shadow: var(--shadow-md);
+}
+
+.plan-header {
+    margin-bottom: var(--space-3);
+}
+
+.plan-title {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-1);
+}
+
+.plan-level {
+    font-size: var(--h2);
+    font-weight: bold;
+    background: var(--accent-gradient);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    line-height: 1.2;
+}
+
+.plan-type {
+    font-size: var(--h3);
+    font-weight: bold;
+    background: var(--accent-gradient);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    line-height: 1.2;
+}
+
+.price {
+    font-size: var(--h2);
+    font-weight: bold;
+    color: var(--primary-dark);
+    margin-bottom: var(--space-4);
+    font-family: var(--font-mono);
+}
+
+.price span {
+    font-size: var(--body);
+    color: var(--secondary-dark);
+}
+
+.benefits {
+    list-style: none;
+    padding: 0;
+    margin-bottom: var(--space-4);
+    flex-grow: 1;
+}
+
+.benefits li {
+    margin-bottom: var(--space-2);
+    padding-left: var(--space-4);
+    position: relative;
+    color: var(--secondary-dark);
+}
+
+.benefits li::before {
+    content: "→";
+    position: absolute;
+    left: 0;
+    color: var(--accent-purple);
+    font-family: var(--font-mono);
+    transition: transform var(--transition-normal);
+}
+
+.benefits li:hover::before {
+    transform: translateX(4px);
+}
+
+.plan-card .cta-primary {
+    width: 100%;
+    margin-top: auto;
+}
+
+/* Membership Benefits Section */
+.membership-benefits {
+    background-color: white;
+    padding: var(--section-spacing) var(--content-padding);
+    text-align: center;
+}
+
+.benefits-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: var(--space-4);
+    max-width: var(--container-xl);
+    margin: var(--space-4) auto;
+}
+
+.benefit-item {
+    padding: var(--space-4);
+    background: var(--card-gradient);
+    border-radius: var(--border-radius-lg);
+    box-shadow: var(--shadow-md);
+    border: 1px solid rgba(142, 84, 233, 0.1);
+    transition: all var(--transition-normal);
+}
+
+.benefit-item:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--shadow-lg), var(--shadow-glow);
+}
+
+.benefit-item i {
+    font-size: var(--icon-size);
+    background: var(--accent-gradient);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    margin-bottom: var(--space-3);
+    display: block;
+}
+
+.benefit-item h3 {
+    color: var(--primary-dark);
+    margin-bottom: var(--space-2);
+}
+
+/* Testimonials Section */
+.testimonials {
+    padding: var(--section-spacing) var(--content-padding);
+    text-align: center;
+    background-color: var(--neutral-light);
+}
+
+.testimonial-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+    gap: var(--space-4);
+    max-width: var(--container-xl);
+    margin: var(--space-4) auto;
+}
+
+.testimonial {
+    background: var(--card-gradient);
+    padding: var(--space-4);
+    border-radius: var(--border-radius-lg);
+    box-shadow: var(--shadow-md);
+    border: 1px solid rgba(142, 84, 233, 0.1);
+    transition: all var(--transition-normal);
+    text-align: left;
+}
+
+.testimonial:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--shadow-lg), var(--shadow-glow);
+}
+
+.testimonial i {
+    font-size: var(--h2);
+    background: var(--accent-gradient);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    margin-bottom: var(--space-3);
+    display: block;
+}
+
+.testimonial p {
+    font-style: italic;
+    margin-bottom: var(--space-3);
+    color: var(--secondary-dark);
+    line-height: var(--leading-loose);
+}
+
+.testimonial cite {
+    font-family: var(--font-mono);
+    font-style: normal;
+    color: var(--accent-purple);
+    font-weight: bold;
+    display: block;
+    margin-top: var(--space-2);
+}
+
+.testimonial .role {
+    font-size: var(--small);
+    color: var(--secondary-dark);
+    font-family: var(--font-mono);
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .membership-plans {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .plan-card {
+        width: 100%;
+        max-width: 400px;
+    }
+
+    .plan-card.featured {
+        transform: none;
+    }
+
+    .plan-card.featured:hover {
+        transform: translateY(-8px);
+    }
+
+    .membership-hero h1 {
+        font-size: calc(var(--h1) * 0.6);
+    }
+
+    .membership-hero p {
+        font-size: calc(var(--h3) * 0.8);
+    }
+
+    .benefits-grid,
+    .testimonial-grid {
+        grid-template-columns: 1fr;
+    }
+}

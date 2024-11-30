@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Clarity Club</title>
+    <link rel="stylesheet" href="css/variables.css">
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <header class="site-nav">
+        <div class="nav-progressive">
+            <div class="nav-primary">
+                <div class="logo">
+                    <a href="index.html">
+                        <img src="images/logo.svg" alt="The Clarity Club Logo" class="logo-image">
+                    </a>
+                </div>
+                <div class="nav-links">
+                    <a href="index.html" class="active">Home</a>
+                    <a href="events.html">Events</a>
+                    <a href="about.html">About</a>
+                    <a href="membership.html">Membership</a>
+                    <a href="blog.html">Blog</a>
+                    <a href="contact.html">Contact</a>
+                </div>
+            </div>
+            <div class="nav-secondary" data-visible="false">
+                <div class="auth-buttons">
+                    <button class="cta-primary">Login</button>
+                    <button class="cta-primary">Sign Up</button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <section class="hero-stack">
+            <span class="overline">The Clarity Club</span>
+            <h1>Find Real Connection</h1>
+            <p class="lead">Meaningful interactions, curated experiences</p>
+            <button class="cta-primary">Join Next Event</button>
+        </section>
+
+        <section class="content-stack">
+            <div class="container">
+                <h2>What We Offer</h2>
+                <div class="grid">
+                    <div class="feature-card">
+                        <i class="fas fa-calendar-alt"></i>
+                        <h3>Exclusive Events</h3>
+                        <p>Join our curated events designed for personal growth</p>
+                        <div class="hover-reveal">
+                            <a href="events.html" class="cta-primary">View Events</a>
+                        </div>
+                    </div>
+                    <div class="feature-card">
+                        <i class="fas fa-users"></i>
+                        <h3>Community</h3>
+                        <p>Connect with like-minded individuals</p>
+                        <div class="hover-reveal">
+                            <a href="membership.html" class="cta-primary">Join Now</a>
+                        </div>
+                    </div>
+                    <div class="feature-card">
+                        <i class="fas fa-book-reader"></i>
+                        <h3>Resources</h3>
+                        <p>Access our extensive library of learning materials</p>
+                        <div class="hover-reveal">
+                            <a href="resources.html" class="cta-primary">Browse Library</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="content-stack">
+            <div class="container">
+                <h2>Upcoming Events</h2>
+                <div class="events-grid">
+                    <!-- Event cards will be dynamically populated -->
+                </div>
+                <div class="disclosure-trigger">
+                    <button class="cta-primary">View All Events</button>
+                </div>
+                <div class="disclosure-content" data-visible="false">
+                    <div class="grid">
+                        <!-- Additional events will be shown here -->
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="content-stack">
+            <div class="container">
+                <h2>Member Stories</h2>
+                <div class="grid">
+                    <div class="feature-card">
+                        <i class="fas fa-quote-left"></i>
+                        <p>"The Clarity Club has transformed how I approach personal growth. The community here is incredible."</p>
+                        <div class="hover-reveal">
+                            <span class="small">Sarah M. - Member since 2023</span>
+                        </div>
+                    </div>
+                    <div class="feature-card">
+                        <i class="fas fa-quote-left"></i>
+                        <p>"I've made meaningful connections and learned so much from the diverse perspectives here."</p>
+                        <div class="hover-reveal">
+                            <span class="small">James R. - Member since 2022</span>
+                        </div>
+                    </div>
+                    <div class="feature-card">
+                        <i class="fas fa-quote-left"></i>
+                        <p>"The events and workshops have given me practical tools for personal development."</p>
+                        <div class="hover-reveal">
+                            <span class="small">Emily K. - Member since 2023</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <div class="footer-logo">
+                        <img src="images/logo.svg" alt="The Clarity Club Logo" class="logo-image">
+                    </div>
+                    <p class="small">Empowering personal growth through community</p>
+                </div>
+                <div class="footer-section">
+                    <h3>Quick Links</h3>
+                    <ul>
+                        <li><a href="about.html">About Us</a></li>
+                        <li><a href="events.html">Events</a></li>
+                        <li><a href="membership.html">Membership</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3>Connect With Us</h3>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-facebook"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-linkedin"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p class="small">&copy; 2024 The Clarity Club. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="js/main.js"></script>
+</body>
+</html>

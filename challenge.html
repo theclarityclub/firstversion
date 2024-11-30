@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>30-Day Challenge - The Clarity Club</title>
+    <link rel="stylesheet" href="css/variables.css">
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="css/challenge.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <header class="site-nav">
+        <div class="nav-progressive">
+            <div class="nav-primary">
+                <div class="logo">
+                    <a href="index.html">
+                        <img src="images/logo.svg" alt="The Clarity Club Logo" class="logo-image">
+                    </a>
+                </div>
+                <div class="nav-links">
+                    <a href="index.html">Home</a>
+                    <a href="events.html">Events</a>
+                    <a href="about.html">About</a>
+                    <a href="membership.html">Membership</a>
+                    <a href="blog.html">Blog</a>
+                    <a href="contact.html">Contact</a>
+                </div>
+            </div>
+            <div class="nav-secondary" data-visible="false">
+                <div class="auth-buttons">
+                    <button class="cta-primary">Login</button>
+                    <button class="cta-primary">Sign Up</button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <section class="challenge-hero">
+            <h1>30-Day Clarity Challenge</h1>
+            <p>Transform your mindset and develop lasting clarity habits in just 30 days.</p>
+            <button class="cta-primary" id="startChallenge">Start Challenge</button>
+        </section>
+
+        <section class="challenge-overview">
+            <div class="container">
+                <h2>What to Expect</h2>
+                <div class="overview-grid">
+                    <div class="overview-item">
+                        <i class="fas fa-tasks"></i>
+                        <h3>Daily Tasks</h3>
+                        <p>Simple, actionable tasks designed to build mindfulness habits.</p>
+                    </div>
+                    <div class="overview-item">
+                        <i class="fas fa-chart-line"></i>
+                        <h3>Progress Tracking</h3>
+                        <p>Monitor your journey with our interactive tracking system.</p>
+                    </div>
+                    <div class="overview-item">
+                        <i class="fas fa-users"></i>
+                        <h3>Community Support</h3>
+                        <p>Connect with others taking the challenge for motivation and tips.</p>
+                    </div>
+                    <div class="overview-item">
+                        <i class="fas fa-star"></i>
+                        <h3>Expert Guidance</h3>
+                        <p>Access professional advice and resources throughout the challenge.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="challenge-tracker" id="challengeTracker">
+            <div class="container">
+                <h2>Challenge Progress</h2>
+                <div class="progress-container">
+                    <div class="progress-bar">
+                        <div class="progress" id="progressBar"></div>
+                        <span class="progress-text">0%</span>
+                    </div>
+                    <div class="day-grid" id="dayGrid">
+                        <!-- Days will be populated by JavaScript -->
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="daily-task" id="dailyTask">
+            <div class="container">
+                <h2>Today's Task</h2>
+                <div class="task-card">
+                    <h3 id="taskTitle">Welcome to Day 1</h3>
+                    <p id="taskDescription">Your journey to clarity begins today. Click 'Start Challenge' to begin.</p>
+                    <button class="task-button" id="completeTask">Complete Task</button>
+                </div>
+            </div>
+        </section>
+
+        <section class="challenge-tips">
+            <div class="container">
+                <h2>Tips for Success</h2>
+                <div class="tips-grid">
+                    <div class="tip">
+                        <i class="fas fa-clock"></i>
+                        <h3>Stay Consistent</h3>
+                        <p>Complete your tasks at the same time each day to build a routine.</p>
+                    </div>
+                    <div class="tip">
+                        <i class="fas fa-chart-bar"></i>
+                        <h3>Track Progress</h3>
+                        <p>Use our tracking system to maintain motivation and accountability.</p>
+                    </div>
+                    <div class="tip">
+                        <i class="fas fa-comments"></i>
+                        <h3>Engage Community</h3>
+                        <p>Share your experiences and learn from others in the challenge.</p>
+                    </div>
+                    <div class="tip">
+                        <i class="fas fa-seedling"></i>
+                        <h3>Be Patient</h3>
+                        <p>Remember that lasting change takes time and consistent effort.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="achievement-section">
+            <div class="container">
+                <h2>Achievement Badges</h2>
+                <div class="badges-grid">
+                    <div class="badge-item">
+                        <div class="badge-icon">
+                            <i class="fas fa-fire"></i>
+                        </div>
+                        <span class="badge-name">7-Day Streak</span>
+                    </div>
+                    <div class="badge-item">
+                        <div class="badge-icon">
+                            <i class="fas fa-medal"></i>
+                        </div>
+                        <span class="badge-name">Halfway Hero</span>
+                    </div>
+                    <div class="badge-item">
+                        <div class="badge-icon">
+                            <i class="fas fa-trophy"></i>
+                        </div>
+                        <span class="badge-name">Challenge Champion</span>
+                    </div>
+                    <div class="badge-item">
+                        <div class="badge-icon">
+                            <i class="fas fa-star"></i>
+                        </div>
+                        <span class="badge-name">Perfect Month</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <div class="footer-logo">
+                        <img src="images/logo.svg" alt="The Clarity Club Logo" class="logo-image">
+                    </div>
+                    <p class="small">Empowering personal growth through community</p>
+                </div>
+                <div class="footer-section">
+                    <h3>Quick Links</h3>
+                    <ul>
+                        <li><a href="about.html">About Us</a></li>
+                        <li><a href="events.html">Events</a></li>
+                        <li><a href="membership.html">Membership</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3>Connect With Us</h3>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-facebook"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-linkedin"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p class="small">&copy; 2024 The Clarity Club. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="js/main.js"></script>
+    <script src="js/challenge.js"></script>
+</body>
+</html>
