@@ -3,11 +3,36 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>30-Day Challenge - The Clarity Club</title>
+    <title>30-Day Social Confidence Challenge - The Clarity Club</title>
     <link rel="stylesheet" href="css/variables.css">
     <link rel="stylesheet" href="css/styles.css">
     <link rel="stylesheet" href="css/challenge.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    
+    <!-- Firebase App (the core Firebase SDK) -->
+    <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-app-compat.js"></script>
+    <!-- Firebase Firestore -->
+    <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore-compat.js"></script>
+    <!-- Firebase Analytics -->
+    <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-analytics-compat.js"></script>
+
+    <script>
+        // Your web app's Firebase configuration
+        const firebaseConfig = {
+            apiKey: "AIzaSyDNDlFpmLp13NmBYGGbBuzx8ZXUhHtyt0k",
+            authDomain: "theclarityclub-e40c3.firebaseapp.com",
+            projectId: "theclarityclub-e40c3",
+            storageBucket: "theclarityclub-e40c3.firebasestorage.app",
+            messagingSenderId: "105761536403",
+            appId: "1:105761536403:web:c187668b95c8c23b809066",
+            measurementId: "G-0QVFQV2MTP"
+        };
+
+        // Initialize Firebase
+        firebase.initializeApp(firebaseConfig);
+        firebase.analytics();
+        const db = firebase.firestore();
+    </script>
 </head>
 <body>
     <header class="site-nav">
@@ -36,10 +61,24 @@
         </div>
     </header>
 
-    <main>
+    <div id="emailOverlay" class="email-overlay">
+        <div class="email-form">
+            <h2>Access the Challenge</h2>
+            <p>Enter your email to start your journey to social confidence.</p>
+            <div class="form-group">
+                <input type="email" id="emailInput" placeholder="Your email address" required>
+                <button id="submitEmail" class="cta-primary">Get Started</button>
+            </div>
+            <div id="emailError" class="error-message"></div>
+            <div id="emailSuccess" class="success-message"></div>
+        </div>
+    </div>
+
+    <main id="challengeContent" style="display: none;">
+        <!-- Rest of the content remains the same -->
         <section class="challenge-hero">
-            <h1>30-Day Clarity Challenge</h1>
-            <p>Transform your mindset and develop lasting clarity habits in just 30 days.</p>
+            <h1>30-Day Social Confidence Challenge</h1>
+            <p>Transform your social interactions and build lasting confidence through daily practice.</p>
             <button class="cta-primary" id="startChallenge">Start Challenge</button>
         </section>
 
@@ -48,24 +87,24 @@
                 <h2>What to Expect</h2>
                 <div class="overview-grid">
                     <div class="overview-item">
-                        <i class="fas fa-tasks"></i>
-                        <h3>Daily Tasks</h3>
-                        <p>Simple, actionable tasks designed to build mindfulness habits.</p>
+                        <i class="fas fa-handshake"></i>
+                        <h3>Daily Social Tasks</h3>
+                        <p>Simple, actionable social interactions designed to build confidence gradually.</p>
                     </div>
                     <div class="overview-item">
                         <i class="fas fa-chart-line"></i>
                         <h3>Progress Tracking</h3>
-                        <p>Monitor your journey with our interactive tracking system.</p>
+                        <p>Monitor your journey and see your confidence grow day by day.</p>
                     </div>
                     <div class="overview-item">
                         <i class="fas fa-users"></i>
                         <h3>Community Support</h3>
-                        <p>Connect with others taking the challenge for motivation and tips.</p>
+                        <p>Connect with others taking the challenge for motivation and shared experiences.</p>
                     </div>
                     <div class="overview-item">
-                        <i class="fas fa-star"></i>
+                        <i class="fas fa-brain"></i>
                         <h3>Expert Guidance</h3>
-                        <p>Access professional advice and resources throughout the challenge.</p>
+                        <p>Access proven social confidence techniques and professional advice.</p>
                     </div>
                 </div>
             </div>
@@ -88,10 +127,10 @@
 
         <section class="daily-task" id="dailyTask">
             <div class="container">
-                <h2>Today's Task</h2>
+                <h2>Today's Social Challenge</h2>
                 <div class="task-card">
                     <h3 id="taskTitle">Welcome to Day 1</h3>
-                    <p id="taskDescription">Your journey to clarity begins today. Click 'Start Challenge' to begin.</p>
+                    <p id="taskDescription">Your journey to social confidence begins today. Click 'Start Challenge' to begin.</p>
                     <button class="task-button" id="completeTask">Complete Task</button>
                 </div>
             </div>
@@ -103,23 +142,23 @@
                 <div class="tips-grid">
                     <div class="tip">
                         <i class="fas fa-clock"></i>
-                        <h3>Stay Consistent</h3>
-                        <p>Complete your tasks at the same time each day to build a routine.</p>
+                        <h3>Start Small</h3>
+                        <p>Begin with comfortable interactions and gradually increase difficulty as your confidence grows.</p>
                     </div>
                     <div class="tip">
-                        <i class="fas fa-chart-bar"></i>
-                        <h3>Track Progress</h3>
-                        <p>Use our tracking system to maintain motivation and accountability.</p>
+                        <i class="fas fa-heart"></i>
+                        <h3>Be Kind to Yourself</h3>
+                        <p>Remember that building confidence is a journey. Celebrate small wins along the way.</p>
                     </div>
                     <div class="tip">
                         <i class="fas fa-comments"></i>
-                        <h3>Engage Community</h3>
-                        <p>Share your experiences and learn from others in the challenge.</p>
+                        <h3>Share Experiences</h3>
+                        <p>Connect with others in the challenge to share stories and support each other.</p>
                     </div>
                     <div class="tip">
-                        <i class="fas fa-seedling"></i>
-                        <h3>Be Patient</h3>
-                        <p>Remember that lasting change takes time and consistent effort.</p>
+                        <i class="fas fa-journal-whills"></i>
+                        <h3>Reflect Daily</h3>
+                        <p>Take time to journal about your experiences and track your progress.</p>
                     </div>
                 </div>
             </div>
@@ -131,27 +170,27 @@
                 <div class="badges-grid">
                     <div class="badge-item">
                         <div class="badge-icon">
-                            <i class="fas fa-fire"></i>
+                            <i class="fas fa-star"></i>
                         </div>
-                        <span class="badge-name">7-Day Streak</span>
+                        <span class="badge-name">First Connection</span>
                     </div>
                     <div class="badge-item">
                         <div class="badge-icon">
-                            <i class="fas fa-medal"></i>
+                            <i class="fas fa-users"></i>
                         </div>
-                        <span class="badge-name">Halfway Hero</span>
+                        <span class="badge-name">Social Butterfly</span>
+                    </div>
+                    <div class="badge-item">
+                        <div class="badge-icon">
+                            <i class="fas fa-crown"></i>
+                        </div>
+                        <span class="badge-name">Confidence Champion</span>
                     </div>
                     <div class="badge-item">
                         <div class="badge-icon">
                             <i class="fas fa-trophy"></i>
                         </div>
-                        <span class="badge-name">Challenge Champion</span>
-                    </div>
-                    <div class="badge-item">
-                        <div class="badge-icon">
-                            <i class="fas fa-star"></i>
-                        </div>
-                        <span class="badge-name">Perfect Month</span>
+                        <span class="badge-name">30-Day Master</span>
                     </div>
                 </div>
             </div>

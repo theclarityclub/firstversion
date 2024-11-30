@@ -1,0 +1,294 @@
+/* Dashboard Layout */
+.dashboard {
+    padding: 2rem;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.dashboard-header {
+    margin-bottom: 2rem;
+    text-align: center;
+}
+
+.dashboard-header h1 {
+    color: var(--color-primary);
+    margin-bottom: 0.5rem;
+}
+
+.membership-status {
+    color: var(--color-text-secondary);
+    font-size: 1.1rem;
+}
+
+.dashboard-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 2rem;
+}
+
+/* Dashboard Cards */
+.dashboard-card {
+    background: var(--color-white);
+    border-radius: 12px;
+    padding: 1.5rem;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.dashboard-card h2 {
+    color: var(--color-text);
+    font-size: 1.25rem;
+    margin-bottom: 1.5rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.dashboard-card h2 i {
+    color: var(--color-primary);
+}
+
+/* Progress Card */
+.progress-card {
+    grid-column: span 2;
+}
+
+.progress-stats {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.5rem;
+    margin-bottom: 2rem;
+}
+
+.stat {
+    text-align: center;
+    padding: 1rem;
+    background: var(--color-background);
+    border-radius: 8px;
+}
+
+.stat h3 {
+    font-size: 0.9rem;
+    color: var(--color-text-secondary);
+    margin-bottom: 0.5rem;
+}
+
+.stat-value {
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: var(--color-primary);
+}
+
+/* Rewards Card */
+.points-display {
+    text-align: center;
+    margin: 1.5rem 0;
+}
+
+.points-circle {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    background: var(--color-primary);
+    color: white;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto;
+}
+
+.points {
+    font-size: 2.5rem;
+    font-weight: 600;
+}
+
+.points-label {
+    font-size: 0.9rem;
+    opacity: 0.9;
+}
+
+.rewards-progress {
+    margin: 1.5rem 0;
+    text-align: center;
+}
+
+.progress-bar {
+    height: 8px;
+    background: var(--color-background);
+    border-radius: 4px;
+    margin: 0.5rem 0;
+    overflow: hidden;
+}
+
+.progress {
+    height: 100%;
+    background: var(--color-primary);
+    border-radius: 4px;
+    transition: width 0.3s ease;
+}
+
+/* Membership Card */
+.membership-details {
+    margin-bottom: 1.5rem;
+}
+
+.detail-item {
+    display: flex;
+    justify-content: space-between;
+    padding: 0.75rem 0;
+    border-bottom: 1px solid var(--color-border);
+}
+
+.detail-item:last-child {
+    border-bottom: none;
+}
+
+.detail-item .label {
+    color: var(--color-text-secondary);
+}
+
+.detail-item .value {
+    font-weight: 500;
+}
+
+.membership-actions {
+    display: flex;
+    gap: 1rem;
+}
+
+/* Events Card */
+.events-list {
+    margin-bottom: 1rem;
+}
+
+.event-item {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 1rem 0;
+    border-bottom: 1px solid var(--color-border);
+}
+
+.event-item:last-child {
+    border-bottom: none;
+}
+
+.event-date {
+    text-align: center;
+    min-width: 60px;
+}
+
+.event-date .day {
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: var(--color-primary);
+    display: block;
+}
+
+.event-date .month {
+    font-size: 0.8rem;
+    color: var(--color-text-secondary);
+}
+
+.event-details {
+    flex: 1;
+}
+
+.event-details h3 {
+    font-size: 1rem;
+    margin-bottom: 0.25rem;
+}
+
+.event-details p {
+    font-size: 0.9rem;
+    color: var(--color-text-secondary);
+}
+
+.view-all {
+    display: block;
+    text-align: center;
+    color: var(--color-primary);
+    text-decoration: none;
+    margin-top: 1rem;
+}
+
+.view-all:hover {
+    text-decoration: underline;
+}
+
+/* User Menu */
+.user-menu {
+    position: relative;
+}
+
+.user-menu-button {
+    background: none;
+    border: none;
+    color: var(--color-text);
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    cursor: pointer;
+    padding: 0.5rem;
+}
+
+.user-menu-button i {
+    font-size: 1.5rem;
+    color: var(--color-primary);
+}
+
+.dropdown-menu {
+    position: absolute;
+    top: 100%;
+    right: 0;
+    background: var(--color-white);
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    padding: 0.5rem;
+    display: none;
+}
+
+.dropdown-menu.active {
+    display: block;
+}
+
+.dropdown-menu a {
+    display: block;
+    padding: 0.5rem 1rem;
+    color: var(--color-text);
+    text-decoration: none;
+    white-space: nowrap;
+}
+
+.dropdown-menu a:hover {
+    background: var(--color-background);
+    border-radius: 4px;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .dashboard-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .progress-card {
+        grid-column: span 1;
+    }
+
+    .progress-stats {
+        grid-template-columns: 1fr;
+    }
+
+    .membership-actions {
+        flex-direction: column;
+    }
+
+    .event-item {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .event-date {
+        margin-bottom: 0.5rem;
+    }
+}

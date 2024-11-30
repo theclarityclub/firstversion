@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Member Dashboard - The Clarity Club</title>
+    <link rel="stylesheet" href="css/variables.css">
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="css/dashboard.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <header class="site-nav">
+        <div class="nav-progressive">
+            <div class="nav-primary">
+                <div class="logo">
+                    <a href="index.html">
+                        <img src="images/logo.svg" alt="The Clarity Club Logo" class="logo-image">
+                    </a>
+                </div>
+                <div class="nav-links">
+                    <a href="index.html">Home</a>
+                    <a href="events.html">Events</a>
+                    <a href="challenge.html">Challenge</a>
+                    <a href="about.html">About</a>
+                    <a href="membership.html">Membership</a>
+                    <a href="blog.html">Blog</a>
+                    <a href="contact.html">Contact</a>
+                </div>
+            </div>
+            <div class="nav-secondary">
+                <div class="user-menu">
+                    <button class="user-menu-button">
+                        <i class="fas fa-user-circle"></i>
+                        <span class="username">Loading...</span>
+                    </button>
+                    <div class="dropdown-menu">
+                        <a href="#" class="sign-out">Sign Out</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <main class="dashboard">
+        <div class="dashboard-header">
+            <h1>Welcome, <span class="member-name">Loading...</span></h1>
+            <p class="membership-status">Premium Member</p>
+        </div>
+
+        <div class="dashboard-grid">
+            <!-- Progress Overview -->
+            <section class="dashboard-card progress-card">
+                <h2><i class="fas fa-chart-line"></i> Your Progress</h2>
+                <div class="progress-stats">
+                    <div class="stat">
+                        <h3>Challenges Completed</h3>
+                        <p class="stat-value">12</p>
+                    </div>
+                    <div class="stat">
+                        <h3>Current Streak</h3>
+                        <p class="stat-value">5 days</p>
+                    </div>
+                    <div class="stat">
+                        <h3>Total Practice Time</h3>
+                        <p class="stat-value">24 hours</p>
+                    </div>
+                </div>
+                <div class="progress-chart">
+                    <!-- Progress chart will be rendered here -->
+                </div>
+            </section>
+
+            <!-- Reward Points -->
+            <section class="dashboard-card rewards-card">
+                <h2><i class="fas fa-star"></i> Reward Points</h2>
+                <div class="points-display">
+                    <div class="points-circle">
+                        <span class="points">750</span>
+                        <span class="points-label">points</span>
+                    </div>
+                </div>
+                <div class="rewards-progress">
+                    <p>250 points until next reward</p>
+                    <div class="progress-bar">
+                        <div class="progress" style="width: 75%"></div>
+                    </div>
+                </div>
+                <a href="#" class="cta-secondary">View Rewards</a>
+            </section>
+
+            <!-- Membership Information -->
+            <section class="dashboard-card membership-card">
+                <h2><i class="fas fa-id-card"></i> Membership Details</h2>
+                <div class="membership-details">
+                    <div class="detail-item">
+                        <span class="label">Plan:</span>
+                        <span class="value">Premium</span>
+                    </div>
+                    <div class="detail-item">
+                        <span class="label">Member Since:</span>
+                        <span class="value">January 15, 2024</span>
+                    </div>
+                    <div class="detail-item">
+                        <span class="label">Next Billing:</span>
+                        <span class="value">February 15, 2024</span>
+                    </div>
+                </div>
+                <div class="membership-actions">
+                    <a href="#" class="cta-secondary">Manage Plan</a>
+                    <a href="#" class="cta-secondary">Billing History</a>
+                </div>
+            </section>
+
+            <!-- Upcoming Events -->
+            <section class="dashboard-card events-card">
+                <h2><i class="fas fa-calendar"></i> Upcoming Events</h2>
+                <div class="events-list">
+                    <!-- Events will be loaded dynamically -->
+                </div>
+                <a href="events.html" class="view-all">View All Events</a>
+            </section>
+        </div>
+    </main>
+
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <div class="footer-logo">
+                        <img src="images/logo.svg" alt="The Clarity Club Logo" class="logo-image">
+                    </div>
+                    <p class="small">Empowering personal growth through community</p>
+                </div>
+                <div class="footer-section">
+                    <h3>Quick Links</h3>
+                    <ul>
+                        <li><a href="about.html">About Us</a></li>
+                        <li><a href="events.html">Events</a></li>
+                        <li><a href="challenge.html">30-Day Challenge</a></li>
+                        <li><a href="membership.html">Membership</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3>Connect With Us</h3>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-facebook"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-linkedin"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p class="small">&copy; 2024 The Clarity Club. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Firebase Scripts -->
+    <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-auth-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore-compat.js"></script>
+    
+    <!-- Application Scripts -->
+    <script src="js/firebase-config.js"></script>
+    <script src="js/dashboard.js"></script>
+</body>
+</html>

@@ -2,17 +2,29 @@
 
 .events-page {
     min-height: 100vh;
-    background-color: var(--neutral-light);
+    background-color: white !important;
+    overflow-x: hidden;
+}
+
+.events-page .container {
+    max-width: var(--container-lg) !important;
+    margin: 0 auto;
+    padding: 0 var(--content-padding);
 }
 
 /* Hero Section */
 .events-hero {
     background: var(--hero-gradient);
-    color: var(--neutral-light);
-    padding: calc(var(--section-spacing) * 1.2) var(--content-padding);
+    color: white;
+    padding: var(--space-4) var(--content-padding);
     text-align: center;
     position: relative;
     overflow: hidden;
+    margin-bottom: var(--space-4);
+    min-height: 300px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
 }
 
 .events-hero::before {
@@ -24,6 +36,14 @@
     height: 200%;
     background: radial-gradient(circle, rgba(142, 84, 233, 0.1) 0%, transparent 50%);
     animation: rotate 20s linear infinite;
+    z-index: 1;
+}
+
+.events-hero h1,
+.events-hero p {
+    position: relative;
+    z-index: 2;
+    color: white !important;
 }
 
 @keyframes rotate {
@@ -34,7 +54,6 @@
 .events-hero h1 {
     font-size: var(--h1);
     margin-bottom: var(--space-3);
-    position: relative;
     animation: fadeIn 1s var(--animation-timing);
 }
 
@@ -43,14 +62,14 @@
     color: var(--primary-light);
     max-width: 600px;
     margin: 0 auto;
-    position: relative;
     animation: slideUp 1s var(--animation-timing);
 }
 
 /* Calendar Section */
 .calendar-section {
-    padding: var(--section-spacing) var(--content-padding);
-    background-color: white;
+    padding: var(--space-4) var(--content-padding);
+    background-color: var(--neutral-light);
+    margin-bottom: var(--space-4);
 }
 
 .calendar-container {
@@ -143,63 +162,11 @@
     filter: drop-shadow(0 4px 8px rgba(142, 84, 233, 0.5));
 }
 
-/* Featured Events */
-.featured-events {
-    padding: var(--section-spacing) var(--content-padding);
-    background-color: white;
-}
-
-.featured-events h2 {
-    text-align: center;
-    color: var(--primary-dark);
-    margin-bottom: var(--space-4);
-}
-
-.events-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: var(--space-4);
-    max-width: var(--container-lg);
-    margin: 0 auto;
-}
-
-.event-card {
-    background: var(--card-gradient);
-    border-radius: var(--border-radius-lg);
-    padding: var(--space-4);
-    transition: all var(--transition-normal);
-    border: 1px solid rgba(142, 84, 233, 0.1);
-    box-shadow: var(--shadow-md);
-}
-
-.event-card:hover {
-    transform: translateY(-4px);
-    box-shadow: var(--shadow-xl), var(--shadow-glow);
-}
-
-.event-card .event-logo {
-    width: 40px;
-    height: 40px;
-    margin-bottom: var(--space-3);
-    transition: transform 0.3s ease;
-    filter: drop-shadow(0 2px 4px rgba(142, 84, 233, 0.3));
-}
-
-.event-card:hover .event-logo {
-    transform: scale(1.2);
-    filter: drop-shadow(0 4px 8px rgba(142, 84, 233, 0.5));
-}
-
-.event-card-content {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-}
-
 /* Filter Section */
 .events-filter {
-    padding: var(--section-spacing) var(--content-padding);
+    padding: var(--space-4) var(--content-padding);
     background-color: var(--neutral-light);
+    margin-bottom: var(--space-4);
 }
 
 .filter-container {
@@ -263,10 +230,64 @@
     box-shadow: var(--shadow-glow);
 }
 
+/* Featured Events */
+.featured-events {
+    padding: var(--space-4) var(--content-padding);
+    background-color: white;
+    margin-bottom: var(--space-4);
+}
+
+.featured-events h2 {
+    text-align: center;
+    color: var(--primary-dark);
+    margin-bottom: var(--space-4);
+}
+
+.events-grid {
+    display: grid !important;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)) !important;
+    gap: var(--space-4) !important;
+    margin: 0 auto !important;
+}
+
+.event-card {
+    background: var(--card-gradient);
+    border-radius: var(--border-radius-lg);
+    padding: var(--space-4);
+    transition: all var(--transition-normal);
+    border: 1px solid rgba(142, 84, 233, 0.1);
+    box-shadow: var(--shadow-md);
+}
+
+.event-card:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--shadow-xl), var(--shadow-glow);
+}
+
+.event-card .event-logo {
+    width: 40px;
+    height: 40px;
+    margin-bottom: var(--space-3);
+    transition: transform 0.3s ease;
+    filter: drop-shadow(0 2px 4px rgba(142, 84, 233, 0.3));
+}
+
+.event-card:hover .event-logo {
+    transform: scale(1.2);
+    filter: drop-shadow(0 4px 8px rgba(142, 84, 233, 0.5));
+}
+
+.event-card-content {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
 /* Events List */
 .upcoming-events {
-    padding: var(--section-spacing) var(--content-padding);
-    background-color: var(--neutral-light);
+    padding: var(--space-4) var(--content-padding);
+    background-color: white;
+    margin-bottom: var(--space-4);
 }
 
 .upcoming-events h2 {
@@ -276,17 +297,16 @@
 }
 
 .events-list {
-    max-width: var(--container-lg);
-    margin: 0 auto;
+    display: grid;
+    gap: var(--space-3);
 }
 
 .event-item {
     background: var(--card-gradient);
     border-radius: var(--border-radius-lg);
     padding: var(--space-4);
-    margin-bottom: var(--space-3);
     display: grid;
-    grid-template-columns: auto 1fr auto;
+    grid-template-columns: 120px 1fr 200px;
     gap: var(--space-4);
     align-items: center;
     transition: all var(--transition-normal);
@@ -304,7 +324,7 @@
     padding: var(--space-2);
     background: var(--accent-gradient);
     border-radius: var(--border-radius-lg);
-    min-width: 100px;
+    width: 100%;
     color: white;
 }
 
@@ -342,6 +362,7 @@
 .event-action {
     display: flex;
     gap: var(--space-2);
+    justify-content: flex-end;
 }
 
 .event-action button {
@@ -354,6 +375,7 @@
     text-transform: uppercase;
     letter-spacing: 0.1em;
     font-size: var(--small);
+    white-space: nowrap;
 }
 
 .btn-register {
@@ -425,6 +447,7 @@
 
     .event-date {
         margin: 0 auto;
+        max-width: 120px;
     }
 
     .event-meta {
