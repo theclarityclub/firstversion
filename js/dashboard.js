@@ -10,6 +10,51 @@ const usernameElement = document.querySelector('.username');
 const treeCanvas = document.getElementById('treeCanvas');
 const ctx = treeCanvas.getContext('2d');
 
+// Add click handler for progress card
+document.querySelector('.progress-card').addEventListener('click', () => {
+    window.location.href = 'progress.html';
+});
+
+// Badge configurations with rewards
+const badgeConfigs = {
+    'early-bird': {
+        name: 'Early Bird',
+        description: 'Complete 5 activities before 9am',
+        reward: {
+            type: 'discount',
+            value: 10,
+            description: '10% off next membership upgrade'
+        }
+    },
+    'night-owl': {
+        name: 'Night Owl',
+        description: 'Complete 5 activities after 8pm',
+        reward: {
+            type: 'discount',
+            value: 10,
+            description: '10% off next membership upgrade'
+        }
+    },
+    'streak-master': {
+        name: 'Streak Master',
+        description: 'Maintain a 7-day streak',
+        reward: {
+            type: 'discount',
+            value: 15,
+            description: '15% off next membership upgrade'
+        }
+    },
+    'social-butterfly': {
+        name: 'Social Butterfly',
+        description: 'Participate in 3 group activities',
+        reward: {
+            type: 'discount',
+            value: 20,
+            description: '20% off next membership upgrade'
+        }
+    }
+};
+
 // Growth Tree Configuration
 const treeConfig = {
     baseColor: '#2E7D32',
@@ -123,6 +168,66 @@ function updateProgressRing(completed, total) {
     document.querySelector('.progress-text').textContent = `${completed}/${total}`;
 }
 
+// Load and display badges
+async function loadAndDisplayBadges(userId) {
+    try {
+        const userDoc = await db.collection('users').doc(userId).get();
+        const userData = userDoc.data();
+        const userBadges = userData.badges || {};
+        
+        const achievementGrid = document.querySelector('.achievement-grid');
+        achievementGrid.innerHTML = '';
+
+        Object.keys(badgeConfigs).forEach(badgeId => {
+            const badge = badgeConfigs[badgeId];
+            const earned = userBadges[badgeId] || false;
+            
+            const badgeElement = document.createElement('div');
+            badgeElement.className = `badge ${earned ? 'earned' : 'locked'}`;
+            
+            badgeElement.innerHTML = `
+                <div class="badge-icon">
+                    <i class="fas ${getBadgeIcon(badgeId)}"></i>
+                </div>
+                <div class="badge-info">
+                    <h3>${badge.name}</h3>
+                    <p>${badge.description}</p>
+                    ${earned ? `<p class="reward">${badge.reward.description}</p>` : ''}
+                </div>
+            `;
+
+            if (earned) {
+                badgeElement.addEventListener('click', () => {
+                    redirectToCheckoutWithReward(badgeId, badge.reward);
+                });
+            }
+
+            achievementGrid.appendChild(badgeElement);
+        });
+    } catch (error) {
+        console.error('Error loading badges:', error);
+    }
+}
+
+// Helper function to get badge icon
+function getBadgeIcon(badgeId) {
+    const icons = {
+        'early-bird': 'fa-sun',
+        'night-owl': 'fa-moon',
+        'streak-master': 'fa-fire',
+        'social-butterfly': 'fa-users'
+    };
+    return icons[badgeId] || 'fa-award';
+}
+
+// Redirect to checkout with reward
+function redirectToCheckoutWithReward(badgeId, reward) {
+    const params = new URLSearchParams(window.location.search);
+    params.append('rewardBadge', badgeId);
+    params.append('rewardValue', reward.value);
+    window.location.href = `checkout.html?${params.toString()}`;
+}
+
 // Load daily lessons
 function loadDailyLessons() {
     const lessonsList = document.querySelector('.lessons-list');
@@ -198,19 +303,19 @@ async function updatePoints(pointsToAdd) {
 }
 
 // Toggle user menu dropdown
-userMenuButton.addEventListener('click', () => {
-    dropdownMenu.classList.toggle('active');
+userMenuButton?.addEventListener('click', () => {
+    dropdownMenu?.classList.toggle('active');
 });
 
 // Close dropdown when clicking outside
 document.addEventListener('click', (e) => {
-    if (!userMenuButton.contains(e.target)) {
-        dropdownMenu.classList.remove('active');
+    if (userMenuButton && !userMenuButton.contains(e.target)) {
+        dropdownMenu?.classList.remove('active');
     }
 });
 
 // Handle sign out
-signOutButton.addEventListener('click', async (e) => {
+signOutButton?.addEventListener('click', async (e) => {
     e.preventDefault();
     try {
         await auth.signOut();
@@ -223,16 +328,14 @@ signOutButton.addEventListener('click', async (e) => {
 // Check authentication state
 auth.onAuthStateChanged(async (user) => {
     if (user) {
-        // User is signed in
         try {
-            // Get user data from Firestore
             const userDoc = await db.collection('users').doc(user.uid).get();
             const userData = userDoc.data() || {};
 
             // Update UI with user data
             const displayName = userData.displayName || user.displayName || user.email.split('@')[0];
             memberNameElements.forEach(el => el.textContent = displayName);
-            usernameElement.textContent = displayName;
+            if (usernameElement) usernameElement.textContent = displayName;
 
             // Initialize dashboard components
             initCanvas();
@@ -242,17 +345,20 @@ auth.onAuthStateChanged(async (user) => {
             await Promise.all([
                 loadUserProgress(user.uid),
                 loadUserRewards(user.uid),
-                loadUpcomingEvents()
+                loadUpcomingEvents(),
+                loadAndDisplayBadges(user.uid)
             ]);
 
             // Initial tree drawing
             drawTree(userData.progress || 0);
 
+            // Setup real-time progress tracking
+            setupProgressTracking(user.uid);
+
         } catch (error) {
             console.error('Error loading user data:', error);
         }
     } else {
-        // User is not signed in, redirect to login
         window.location.href = 'login.html';
     }
 });
@@ -265,7 +371,9 @@ async function loadUserProgress(userId) {
             challengesCompleted: 0,
             currentStreak: 0,
             totalPracticeTime: 0,
-            completedLessons: 0
+            completedLessons: 0,
+            masteredSkills: 0,
+            growingSkills: 0
         };
 
         // Update progress stats
@@ -283,8 +391,16 @@ async function loadUserProgress(userId) {
         document.querySelector('.skills-count').textContent = progressData.masteredSkills || 0;
         document.querySelector('.growing-count').textContent = progressData.growingSkills || 0;
 
+        // Update streak info
+        const streakElement = document.querySelector('.streak-days');
+        if (streakElement) {
+            streakElement.textContent = `${progressData.currentStreak} days`;
+        }
+
+        return progressData;
     } catch (error) {
         console.error('Error loading progress:', error);
+        return null;
     }
 }
 
@@ -323,8 +439,43 @@ async function loadUserRewards(userId) {
         document.querySelector('.points-list li:nth-child(3) .points-value')
             .textContent = `+${dailyPoints.challenges}/150`;
 
+        // Update milestone
+        const milestoneElement = document.querySelector('.milestone-points');
+        if (milestoneElement) {
+            const milestones = [100, 250, 500, 1000, 2500, 5000, 10000];
+            const nextMilestone = milestones.find(m => m > points) || 'Max Level';
+            milestoneElement.textContent = `${nextMilestone} points`;
+        }
+
     } catch (error) {
         console.error('Error loading rewards:', error);
+    }
+}
+
+// Setup progress tracking
+function setupProgressTracking(userId) {
+    try {
+        // Listen for real-time updates
+        const unsubscribe = db.collection('users')
+            .doc(userId)
+            .onSnapshot((doc) => {
+                if (doc.exists) {
+                    const data = doc.data();
+                    loadUserProgress(userId);
+                    loadUserRewards(userId);
+                    loadAndDisplayBadges(userId);
+                    drawTree(data.progress || 0);
+                }
+            }, (error) => {
+                console.error('Error setting up progress tracking:', error);
+            });
+
+        // Clean up listener on page unload
+        window.addEventListener('unload', () => {
+            unsubscribe();
+        });
+    } catch (error) {
+        console.error('Error in progress tracking setup:', error);
     }
 }
 
@@ -339,7 +490,7 @@ async function loadUpcomingEvents() {
             .get();
 
         const eventsList = document.querySelector('.events-list');
-        eventsList.innerHTML = ''; // Clear existing events
+        eventsList.innerHTML = '';
 
         eventsSnapshot.forEach(doc => {
             const event = doc.data();
