@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Challenge Dashboard - The Clarity Club</title>
+    <link rel="stylesheet" href="css/variables.css">
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="css/challenge.css">
+    <link rel="stylesheet" href="css/challenge-dashboard.css">
+    <link rel="stylesheet" href="css/hamburger.css">
+    <link rel="stylesheet" href="css/navigation.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <div class="dropdown-menu">
+        <button class="menu-btn">
+            <i class="fas fa-bars menu-icon"></i>
+            Menu
+        </button>
+        <div class="menu-content">
+            <a href="index.html">Home</a>
+            <a href="about.html">About</a>
+            <a href="challenge.html">Challenge</a>
+            <a href="challenge-dashboard.html">Dashboard</a>
+            <a href="resources.html">Resources</a>
+            <a href="membership.html">Membership</a>
+            <a href="blog.html">Blog</a>
+            <a href="events.html">Events</a>
+            <a href="contact.html">Contact</a>
+        </div>
+    </div>
+
+    <main id="challengeDashboard">
+        <section class="challenge-header">
+            <div class="container">
+                <div class="logo-container">
+                    <img src="images/logo.svg" alt="The Clarity Club Logo" class="dashboard-logo">
+                </div>
+                <h1>Your Challenge Dashboard</h1>
+                <p>Track your progress and complete daily challenges to build social confidence.</p>
+                <div class="header-glow"></div>
+            </div>
+        </section>
+
+        <section class="daily-task" id="dailyTask">
+            <div class="container">
+                <h2>Today's Social Challenge</h2>
+                <div class="task-card">
+                    <div class="task-content">
+                        <div class="task-icon">
+                            <i class="fas fa-star"></i>
+                        </div>
+                        <h3 id="taskTitle">Welcome to Day 1</h3>
+                        <p id="taskDescription">Your journey to social confidence begins today.</p>
+                        <button class="task-button" id="completeTask">
+                            <span class="button-text">Complete Task</span>
+                            <div class="button-glow"></div>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="challenge-tracker" id="challengeTracker">
+            <div class="container">
+                <h2>Challenge Progress</h2>
+                <div class="progress-container">
+                    <div class="progress-bar">
+                        <div class="progress" id="progressBar">
+                            <div class="progress-shine"></div>
+                        </div>
+                        <span class="progress-text">0%</span>
+                    </div>
+                    <div class="day-grid" id="dayGrid">
+                        <!-- Days will be populated by JavaScript -->
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="achievement-section">
+            <div class="container">
+                <h2>Your Achievement Badges</h2>
+                <div class="badges-grid">
+                    <div class="badge-item" data-badge="firstConnection">
+                        <div class="badge-icon">
+                            <i class="fas fa-star"></i>
+                            <div class="badge-glow"></div>
+                        </div>
+                        <div class="badge-content">
+                            <span class="badge-name">First Connection</span>
+                            <div class="badge-reward">
+                                <span class="reward-text">5% off any membership for 3 months</span>
+                            </div>
+                            <div class="badge-unlock">
+                                <span class="unlock-text">Unlocks on Day 1</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="badge-item" data-badge="socialButterfly">
+                        <div class="badge-icon">
+                            <i class="fas fa-users"></i>
+                            <div class="badge-glow"></div>
+                        </div>
+                        <div class="badge-content">
+                            <span class="badge-name">Social Butterfly</span>
+                            <div class="badge-reward">
+                                <span class="reward-text">1 month basic membership free</span>
+                            </div>
+                            <div class="badge-unlock">
+                                <span class="unlock-text">Unlocks on Day 10</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="badge-item" data-badge="confidenceChampion">
+                        <div class="badge-icon">
+                            <i class="fas fa-crown"></i>
+                            <div class="badge-glow"></div>
+                        </div>
+                        <div class="badge-content">
+                            <span class="badge-name">Confidence Champion</span>
+                            <div class="badge-reward">
+                                <span class="reward-text">20% off any membership for 3 months</span>
+                            </div>
+                            <div class="badge-unlock">
+                                <span class="unlock-text">Unlocks on Day 20</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="badge-item" data-badge="masterAchiever">
+                        <div class="badge-icon">
+                            <i class="fas fa-trophy"></i>
+                            <div class="badge-glow"></div>
+                        </div>
+                        <div class="badge-content">
+                            <span class="badge-name">30-Day Master</span>
+                            <div class="badge-reward">
+                                <span class="reward-text">1 month premium membership free</span>
+                            </div>
+                            <div class="badge-unlock">
+                                <span class="unlock-text">Unlocks on Day 30</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Firebase SDK -->
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-firestore.js"></script>
+    
+    <!-- Our Scripts -->
+    <script src="js/firebase-config.js"></script>
+    <script src="js/navigation.js"></script>
+    <script src="js/challenge.js"></script>
+</body>
+</html>

@@ -2,6 +2,13 @@ rules_version = '2';
 
 service cloud.firestore {
   match /databases/{database}/documents {
+    // Allow anyone to create their own challenge participant document using their email as ID
+    match /challenge_participants/{email} {
+      allow read: if true;
+      allow create: if request.resource.data.email == email;
+      allow update: if request.resource.data.email == email;
+    }
+    
     // Allow authenticated users to read and write their own data
     match /users/{userId} {
       allow read, write: if request.auth != null && request.auth.uid == userId;
@@ -17,6 +24,15 @@ service cloud.firestore {
     
     match /memberships/{userId} {
       allow read, write: if request.auth != null && request.auth.uid == userId;
+    }
+    
+    // Allow authenticated users to track their lesson progress
+    match /userLessons/{docId} {
+      allow read: if request.auth != null && docId.matches(request.auth.uid + '_.*');
+      allow create, update: if request.auth != null && 
+                             request.resource.data.userId == request.auth.uid &&
+                             docId == request.resource.data.userId + '_' + request.resource.data.lessonId;
+      allow delete: if false; // Cannot delete lesson completion records
     }
     
     // Allow authenticated users to read events

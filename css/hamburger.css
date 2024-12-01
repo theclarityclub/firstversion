@@ -1,0 +1,83 @@
+.hamburger-menu {
+    display: flex;
+    align-items: center;
+}
+
+.hamburger-btn {
+    background: transparent;
+    border: none;
+    padding: 8px;
+    cursor: pointer;
+    margin-left: 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.hamburger-icon {
+    font-size: 24px;
+    line-height: 1;
+    color: #333;
+}
+
+.hamburger-dropdown {
+    position: fixed;
+    top: 70px;
+    left: 1rem;
+    background: white;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    padding: 0.5rem 0;
+    min-width: 200px;
+    display: none;
+    z-index: 9999;
+}
+
+.hamburger-dropdown.show {
+    display: block;
+}
+
+.hamburger-dropdown a {
+    display: block;
+    padding: 0.75rem 1.5rem;
+    color: #333;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    font-size: 1rem;
+    font-weight: 500;
+}
+
+.hamburger-dropdown a:hover {
+    background: #f5f5f5;
+    color: #9370DB;
+}
+
+.hamburger-dropdown a.active {
+    background: #f5f5f5;
+    color: #9370DB;
+    border-left: 3px solid #9370DB;
+    padding-left: calc(1.5rem - 3px);
+}
+
+/* Animation for dropdown */
+@keyframes scaleIn {
+    from {
+        opacity: 0;
+        transform: scale(0.95) translateY(-10px);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1) translateY(0);
+    }
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .hamburger-dropdown {
+        left: 1rem;
+        right: 1rem;
+        top: 65px;
+        width: auto;
+        max-width: none;
+    }
+}

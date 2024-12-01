@@ -47,6 +47,244 @@
     color: var(--color-primary);
 }
 
+/* Growth Tree Card */
+.growth-tree-card {
+    grid-column: span 2;
+}
+
+.growth-tree {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2rem;
+}
+
+#treeCanvas {
+    width: 100%;
+    height: 400px;
+    background: var(--color-background);
+    border-radius: 8px;
+}
+
+.tree-stats {
+    display: flex;
+    gap: 2rem;
+    justify-content: center;
+    width: 100%;
+}
+
+.tree-stat {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 1.1rem;
+}
+
+.tree-stat i {
+    color: var(--color-primary);
+    font-size: 1.25rem;
+}
+
+/* Daily Lessons Card */
+.daily-lessons {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.lesson-progress {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+}
+
+.progress-ring {
+    position: relative;
+    width: 120px;
+    height: 120px;
+}
+
+.progress-ring svg {
+    width: 100%;
+    height: 100%;
+    transform: rotate(-90deg);
+}
+
+.progress-ring-circle {
+    fill: none;
+    stroke: var(--color-primary);
+    stroke-width: 8;
+    stroke-dasharray: 339.292;
+    stroke-dashoffset: 339.292;
+    transition: stroke-dashoffset 0.3s ease;
+}
+
+.progress-ring::before {
+    content: '';
+    position: absolute;
+    inset: 8px;
+    border-radius: 50%;
+    background: var(--color-background);
+}
+
+.progress-text {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: var(--color-primary);
+}
+
+.lessons-list {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.lesson-item {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 1rem;
+    background: var(--color-background);
+    border-radius: 8px;
+    transition: transform 0.2s ease;
+    cursor: pointer;
+}
+
+.lesson-item:hover {
+    transform: translateX(5px);
+}
+
+.lesson-icon {
+    width: 40px;
+    height: 40px;
+    background: var(--color-white);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--color-primary);
+}
+
+.lesson-content {
+    flex: 1;
+}
+
+.lesson-title {
+    font-weight: 500;
+    margin-bottom: 0.25rem;
+}
+
+.lesson-duration {
+    font-size: 0.9rem;
+    color: var(--color-text-secondary);
+}
+
+.lesson-status {
+    padding: 0.25rem 0.75rem;
+    border-radius: 12px;
+    font-size: 0.8rem;
+    font-weight: 500;
+}
+
+.status-incomplete {
+    background: var(--color-background);
+    color: var(--color-text-secondary);
+}
+
+.status-complete {
+    background: var(--color-primary);
+    color: white;
+}
+
+/* Points & Rewards */
+.points-display {
+    text-align: center;
+    margin: 1.5rem 0;
+}
+
+.points-circle {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    background: var(--color-primary);
+    color: white;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.points {
+    font-size: 2.5rem;
+    font-weight: 600;
+}
+
+.points-label {
+    font-size: 0.9rem;
+    opacity: 0.9;
+}
+
+.points-breakdown {
+    margin: 1.5rem 0;
+    padding: 1rem;
+    background: var(--color-background);
+    border-radius: 8px;
+}
+
+.points-breakdown h3 {
+    font-size: 1rem;
+    margin-bottom: 1rem;
+    color: var(--color-text-secondary);
+}
+
+.points-list {
+    list-style: none;
+    padding: 0;
+}
+
+.points-list li {
+    display: flex;
+    justify-content: space-between;
+    padding: 0.5rem 0;
+    border-bottom: 1px solid var(--color-border);
+}
+
+.points-list li:last-child {
+    border-bottom: none;
+}
+
+.points-value {
+    font-weight: 500;
+    color: var(--color-primary);
+}
+
+.rewards-progress {
+    margin: 1.5rem 0;
+    text-align: center;
+}
+
+.progress-bar {
+    height: 8px;
+    background: var(--color-background);
+    border-radius: 4px;
+    margin: 0.5rem 0;
+    overflow: hidden;
+}
+
+.progress {
+    height: 100%;
+    background: var(--color-primary);
+    border-radius: 4px;
+    transition: width 0.3s ease;
+}
+
 /* Progress Card */
 .progress-card {
     grid-column: span 2;
@@ -76,84 +314,6 @@
     font-size: 1.5rem;
     font-weight: 600;
     color: var(--color-primary);
-}
-
-/* Rewards Card */
-.points-display {
-    text-align: center;
-    margin: 1.5rem 0;
-}
-
-.points-circle {
-    width: 150px;
-    height: 150px;
-    border-radius: 50%;
-    background: var(--color-primary);
-    color: white;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    margin: 0 auto;
-}
-
-.points {
-    font-size: 2.5rem;
-    font-weight: 600;
-}
-
-.points-label {
-    font-size: 0.9rem;
-    opacity: 0.9;
-}
-
-.rewards-progress {
-    margin: 1.5rem 0;
-    text-align: center;
-}
-
-.progress-bar {
-    height: 8px;
-    background: var(--color-background);
-    border-radius: 4px;
-    margin: 0.5rem 0;
-    overflow: hidden;
-}
-
-.progress {
-    height: 100%;
-    background: var(--color-primary);
-    border-radius: 4px;
-    transition: width 0.3s ease;
-}
-
-/* Membership Card */
-.membership-details {
-    margin-bottom: 1.5rem;
-}
-
-.detail-item {
-    display: flex;
-    justify-content: space-between;
-    padding: 0.75rem 0;
-    border-bottom: 1px solid var(--color-border);
-}
-
-.detail-item:last-child {
-    border-bottom: none;
-}
-
-.detail-item .label {
-    color: var(--color-text-secondary);
-}
-
-.detail-item .value {
-    font-weight: 500;
-}
-
-.membership-actions {
-    display: flex;
-    gap: 1rem;
 }
 
 /* Events Card */
@@ -246,6 +406,7 @@
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     padding: 0.5rem;
     display: none;
+    z-index: 100;
 }
 
 .dropdown-menu.active {
@@ -271,12 +432,17 @@
         grid-template-columns: 1fr;
     }
 
-    .progress-card {
+    .progress-card, .growth-tree-card {
         grid-column: span 1;
     }
 
     .progress-stats {
         grid-template-columns: 1fr;
+    }
+
+    .tree-stats {
+        flex-direction: column;
+        align-items: center;
     }
 
     .membership-actions {
@@ -290,5 +456,9 @@
 
     .event-date {
         margin-bottom: 0.5rem;
+    }
+
+    #treeCanvas {
+        height: 300px;
     }
 }

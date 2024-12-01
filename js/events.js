@@ -9,14 +9,40 @@ class Calendar {
             "July", "August", "September", "October", "November", "December"];
         this.dayNames = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
         
-        // Cache for performance
-        this._eventDates = new Set([5, 10, 15, 20, 25]); // Mock event dates
+        // Enhanced event data structure
+        this.events = {
+            "2024-02-15": {
+                title: "Mindfulness Workshop",
+                date: "2024-02-15",
+                time: "10:00 AM",
+                location: "Virtual",
+                category: "workshop",
+                description: "Join us for a guided mindfulness session focused on stress reduction and mental clarity. Learn practical techniques for maintaining focus and reducing anxiety in your daily life."
+            },
+            "2024-02-20": {
+                title: "Networking Mixer",
+                date: "2024-02-20",
+                time: "6:00 PM",
+                location: "Downtown Hub",
+                category: "networking",
+                description: "Connect with fellow members in a relaxed atmosphere. Share experiences, build relationships, and explore potential collaborations in our vibrant community."
+            },
+            "2024-02-25": {
+                title: "Personal Growth Seminar",
+                date: "2024-02-25",
+                time: "2:00 PM",
+                location: "Community Center",
+                category: "seminar",
+                description: "Learn effective strategies for personal development and goal achievement. Our expert speakers will share insights on motivation, habit formation, and success principles."
+            }
+        };
         
         this.initialize();
     }
 
     initialize() {
         this.setupCalendar();
+        this.setupPopup();
     }
 
     setupCalendar() {
@@ -24,7 +50,6 @@ class Calendar {
         const nextMonthBtn = document.getElementById('nextMonth');
         
         if (prevMonthBtn && nextMonthBtn) {
-            // Add hover effects
             [prevMonthBtn, nextMonthBtn].forEach(btn => {
                 btn.addEventListener('mouseenter', () => {
                     btn.style.transform = 'scale(1.1)';
@@ -42,12 +67,50 @@ class Calendar {
         this.renderCalendar();
     }
 
+    setupPopup() {
+        const popup = document.querySelector('.event-popup-overlay');
+        const closeBtn = document.querySelector('.event-popup-close');
+        
+        if (closeBtn) {
+            closeBtn.addEventListener('click', () => this.hideEventPopup());
+        }
+
+        if (popup) {
+            popup.addEventListener('click', (e) => {
+                if (e.target === popup) {
+                    this.hideEventPopup();
+                }
+            });
+        }
+
+        // Setup register button
+        const registerBtn = document.querySelector('.event-popup-register');
+        if (registerBtn) {
+            registerBtn.addEventListener('click', () => {
+                registerBtn.textContent = 'Registered!';
+                registerBtn.disabled = true;
+                setTimeout(() => {
+                    this.hideEventPopup();
+                    registerBtn.textContent = 'Register Now';
+                    registerBtn.disabled = false;
+                }, 1500);
+            });
+        }
+
+        // Setup share button
+        const shareBtn = document.querySelector('.event-popup-share');
+        if (shareBtn) {
+            shareBtn.addEventListener('click', () => {
+                alert('Sharing functionality coming soon!');
+            });
+        }
+    }
+
     updateCalendarHeader() {
         const monthHeader = document.getElementById('currentMonth');
         if (monthHeader) {
             monthHeader.textContent = `${this.monthNames[this.currentMonth]} ${this.currentYear}`;
             
-            // Add subtle animation
             monthHeader.style.animation = 'fadeInDown 0.5s ease-out';
             monthHeader.addEventListener('animationend', () => {
                 monthHeader.style.animation = '';
@@ -70,14 +133,52 @@ class Calendar {
         this.renderCalendar();
     }
 
+    getEventForDate(year, month, day) {
+        const dateStr = `${year}-${String(month + 1).padStart(2, '0')}-${String(day).padStart(2, '0')}`;
+        return this.events[dateStr];
+    }
+
+    showEventPopup(event) {
+        const overlay = document.querySelector('.event-popup-overlay');
+        const popup = document.querySelector('.event-popup');
+        if (!overlay || !popup) return;
+
+        // Populate event details
+        document.querySelector('.event-popup-title').textContent = event.title;
+        document.querySelector('.event-popup-date').textContent = new Date(event.date).toLocaleDateString();
+        document.querySelector('.event-popup-time').textContent = event.time;
+        document.querySelector('.event-popup-location').textContent = event.location;
+        document.querySelector('.event-popup-category').textContent = event.category.charAt(0).toUpperCase() + event.category.slice(1);
+        document.querySelector('.event-popup-description').textContent = event.description;
+
+        // Show popup with animation
+        overlay.classList.add('active');
+        setTimeout(() => popup.classList.add('active'), 10);
+
+        // Disable page scroll
+        document.body.style.overflow = 'hidden';
+    }
+
+    hideEventPopup() {
+        const overlay = document.querySelector('.event-popup-overlay');
+        const popup = document.querySelector('.event-popup');
+        if (!overlay || !popup) return;
+
+        popup.classList.remove('active');
+        setTimeout(() => {
+            overlay.classList.remove('active');
+            // Re-enable page scroll
+            document.body.style.overflow = '';
+        }, 300);
+    }
+
     renderCalendar() {
         const calendarGrid = document.querySelector('.calendar-grid');
         if (!calendarGrid) return;
 
-        // Create fragment for performance
         const fragment = document.createDocumentFragment();
 
-        // Add day headers with style
+        // Add day headers
         this.dayNames.forEach(day => {
             const dayHeader = document.createElement('div');
             dayHeader.className = 'day-header';
@@ -90,47 +191,48 @@ class Calendar {
         const startingDay = firstDay.getDay();
         const totalDays = lastDay.getDate();
 
-        // Add empty cells with fade effect
+        // Add empty cells
         for (let i = 0; i < startingDay; i++) {
             const emptyDay = document.createElement('div');
             emptyDay.className = 'calendar-day empty';
             fragment.appendChild(emptyDay);
         }
 
-        // Add days with interactive effects
+        // Add days with event indicators
         for (let day = 1; day <= totalDays; day++) {
             const dayCell = document.createElement('div');
             dayCell.className = 'calendar-day';
             dayCell.textContent = day;
 
-            // Add hover effect
+            const event = this.getEventForDate(this.currentYear, this.currentMonth, day);
+            if (event) {
+                const eventIndicator = document.createElement('div');
+                eventIndicator.className = 'event-indicator';
+                eventIndicator.innerHTML = '<i class="fa-solid fa-star"></i>';
+                dayCell.appendChild(eventIndicator);
+
+                dayCell.style.cursor = 'pointer';
+                dayCell.addEventListener('click', () => this.showEventPopup(event));
+            }
+
+            // Add hover effects
             dayCell.addEventListener('mouseenter', () => {
-                dayCell.style.transform = 'scale(1.1)';
-                dayCell.style.boxShadow = '0 4px 8px rgba(0,0,0,0.1)';
+                if (event) {
+                    dayCell.style.transform = 'scale(1.1)';
+                    dayCell.style.boxShadow = '0 4px 8px rgba(0,0,0,0.1)';
+                }
             });
             dayCell.addEventListener('mouseleave', () => {
-                dayCell.style.transform = 'scale(1)';
-                dayCell.style.boxShadow = 'none';
+                if (event) {
+                    dayCell.style.transform = 'scale(1)';
+                    dayCell.style.boxShadow = 'none';
+                }
             });
-
-            // Add event indicator with animation
-            if (this._eventDates.has(day)) {
-                const eventLogo = document.createElement('div');
-                eventLogo.className = 'event-indicator';
-                eventLogo.innerHTML = '<i class="fa-solid fa-star"></i>';
-                dayCell.appendChild(eventLogo);
-
-                // Add tooltip
-                dayCell.setAttribute('title', 'Event scheduled on this day');
-                dayCell.addEventListener('click', () => {
-                    alert('Event details coming soon!');
-                });
-            }
 
             fragment.appendChild(dayCell);
         }
 
-        // Smooth transition for calendar updates
+        // Smooth transition
         calendarGrid.style.opacity = '0';
         calendarGrid.innerHTML = '';
         calendarGrid.appendChild(fragment);
@@ -164,7 +266,6 @@ class EventManager {
         const searchInput = document.getElementById('eventSearch');
         const filters = document.querySelectorAll('select[id$="Filter"]');
 
-        // Add search animation
         if (searchInput) {
             searchInput.addEventListener('focus', () => {
                 searchInput.style.transform = 'scale(1.02)';
@@ -175,7 +276,6 @@ class EventManager {
                 searchInput.style.boxShadow = 'none';
             });
             
-            // Debounce search for performance
             let timeout;
             searchInput.addEventListener('input', () => {
                 clearTimeout(timeout);
@@ -183,7 +283,6 @@ class EventManager {
             });
         }
 
-        // Add filter animations
         filters.forEach(filter => {
             filter.addEventListener('change', () => {
                 filter.style.animation = 'pulse 0.3s ease-out';
@@ -252,7 +351,7 @@ class EventManager {
             return this.matchesFilters(event, filters);
         });
 
-        this.renderEvents(filteredEvents, true); // true for animation
+        this.renderEvents(filteredEvents, true);
     }
 
     matchesFilters(event, filters) {
@@ -384,13 +483,14 @@ window.registerForEvent = (eventId) => {
 };
 
 window.showEventDetails = (eventId) => {
-    const button = event.target;
-    button.classList.add('active');
+    const calendar = new Calendar();
+    const event = calendar.events[Object.keys(calendar.events).find(key => 
+        calendar.events[key].id === eventId
+    )];
     
-    setTimeout(() => {
-        alert('Event details feature coming soon!');
-        button.classList.remove('active');
-    }, 200);
+    if (event) {
+        calendar.showEventPopup(event);
+    }
 };
 
 // Initialize systems

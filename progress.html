@@ -3,10 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Page Not Found - The Clarity Club</title>
+    <title>Your Progress - The Clarity Club</title>
     <link rel="stylesheet" href="css/variables.css">
     <link rel="stylesheet" href="css/styles.css">
-    <link rel="stylesheet" href="css/404.css">
+    <link rel="stylesheet" href="css/progress.css">
     <link rel="stylesheet" href="css/hamburger.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
@@ -27,7 +27,7 @@
                     <a href="events.html">Events</a>
                     <a href="resources.html">Resources</a>
                     <a href="challenge.html">Challenge</a>
-                    <a href="progress.html">Progress</a>
+                    <a href="progress.html" class="active">Progress</a>
                     <a href="dashboard.html">Dashboard</a>
                     <a href="contact.html">Contact</a>
                 </div>
@@ -35,7 +35,60 @@
         </div>
     </nav>
 
-    <!-- Main content here -->
+    <main>
+        <section class="progress-overview">
+            <h1>Your Growth Journey</h1>
+            <div class="points-display">
+                <h2>Clarity Points</h2>
+                <div class="points-value">0</div>
+                <div class="points-breakdown">
+                    <div class="streak-info">
+                        <span>Current Streak:</span>
+                        <span class="streak-days">0 days</span>
+                    </div>
+                    <div class="next-milestone">
+                        <span>Next Milestone:</span>
+                        <span class="milestone-points">100 points</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="growth-tree">
+            <h2>Your Growth Tree</h2>
+            <div class="tree-container">
+                <canvas id="treeCanvas"></canvas>
+                <div class="tree-legend">
+                    <div class="legend-item">
+                        <span class="legend-color social"></span>
+                        <span>Social Skills</span>
+                    </div>
+                    <div class="legend-item">
+                        <span class="legend-color emotional"></span>
+                        <span>Emotional Intelligence</span>
+                    </div>
+                    <div class="legend-item">
+                        <span class="legend-color communication"></span>
+                        <span>Communication</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="achievements">
+            <h2>Recent Achievements</h2>
+            <div class="achievement-grid">
+                <div class="achievement-placeholder">Complete your first lesson to unlock achievements</div>
+            </div>
+        </section>
+
+        <section class="progress-heatmap">
+            <h2>Engagement Pattern</h2>
+            <div class="heatmap-container">
+                <div class="heatmap-placeholder">Start your journey to see your engagement pattern</div>
+            </div>
+        </section>
+    </main>
 
     <footer>
         <div class="container">

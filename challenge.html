@@ -7,79 +7,74 @@
     <link rel="stylesheet" href="css/variables.css">
     <link rel="stylesheet" href="css/styles.css">
     <link rel="stylesheet" href="css/challenge.css">
+    <link rel="stylesheet" href="css/hamburger.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-    
-    <!-- Firebase App (the core Firebase SDK) -->
-    <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-app-compat.js"></script>
-    <!-- Firebase Firestore -->
-    <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore-compat.js"></script>
-    <!-- Firebase Analytics -->
-    <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-analytics-compat.js"></script>
-
-    <script>
-        // Your web app's Firebase configuration
-        const firebaseConfig = {
-            apiKey: "AIzaSyDNDlFpmLp13NmBYGGbBuzx8ZXUhHtyt0k",
-            authDomain: "theclarityclub-e40c3.firebaseapp.com",
-            projectId: "theclarityclub-e40c3",
-            storageBucket: "theclarityclub-e40c3.firebasestorage.app",
-            messagingSenderId: "105761536403",
-            appId: "1:105761536403:web:c187668b95c8c23b809066",
-            measurementId: "G-0QVFQV2MTP"
-        };
-
-        // Initialize Firebase
-        firebase.initializeApp(firebaseConfig);
-        firebase.analytics();
-        const db = firebase.firestore();
-    </script>
 </head>
 <body>
-    <header class="site-nav">
+    <nav class="site-nav">
         <div class="nav-progressive">
             <div class="nav-primary">
-                <div class="logo">
-                    <a href="index.html">
+                <div class="nav-left">
+                    <a href="index.html" class="logo">
                         <img src="images/logo.svg" alt="The Clarity Club Logo" class="logo-image">
                     </a>
+                    <button class="hamburger-btn" aria-label="Toggle menu">
+                        <span class="hamburger-icon">☰</span>
+                    </button>
                 </div>
+                
+                <!-- Desktop Navigation -->
                 <div class="nav-links">
                     <a href="index.html">Home</a>
+                    <a href="login.html">Login</a>
                     <a href="events.html">Events</a>
-                    <a href="about.html">About</a>
-                    <a href="membership.html">Membership</a>
-                    <a href="blog.html">Blog</a>
-                    <a href="contact.html">Contact</a>
-                </div>
-            </div>
-            <div class="nav-secondary" data-visible="false">
-                <div class="auth-buttons">
-                    <button class="cta-primary">Login</button>
-                    <button class="cta-primary">Sign Up</button>
+                    <a href="challenge.html" class="active">Challenge</a>
                 </div>
             </div>
         </div>
-    </header>
+    </nav>
 
-    <div id="emailOverlay" class="email-overlay">
-        <div class="email-form">
-            <h2>Access the Challenge</h2>
-            <p>Enter your email to start your journey to social confidence.</p>
-            <div class="form-group">
-                <input type="email" id="emailInput" placeholder="Your email address" required>
-                <button id="submitEmail" class="cta-primary">Get Started</button>
-            </div>
-            <div id="emailError" class="error-message"></div>
-            <div id="emailSuccess" class="success-message"></div>
-        </div>
+    <!-- Hamburger Dropdown Menu -->
+    <div class="hamburger-dropdown">
+        <a href="index.html">Home</a>
+        <a href="about.html">About</a>
+        <a href="membership.html">Membership</a>
+        <a href="blog.html">Blog</a>
+        <a href="events.html">Events</a>
+        <a href="resources.html">Resources</a>
+        <a href="challenge.html" class="active">Challenge</a>
+        <a href="progress.html">Progress</a>
+        <a href="dashboard.html">Dashboard</a>
+        <a href="contact.html">Contact</a>
+        <a href="login.html">Login</a>
     </div>
 
-    <main id="challengeContent" style="display: none;">
-        <!-- Rest of the content remains the same -->
+    <main>
         <section class="challenge-hero">
             <h1>30-Day Social Confidence Challenge</h1>
             <p>Transform your social interactions and build lasting confidence through daily practice.</p>
-            <button class="cta-primary" id="startChallenge">Start Challenge</button>
+        </section>
+
+        <!-- Email Collection Form -->
+        <section class="join-challenge">
+            <div class="container">
+                <div class="email-form">
+                    <h2>Join the Challenge</h2>
+                    <p>Enter your email to start your journey towards greater social confidence. You'll get immediate access to:</p>
+                    <ul class="benefits-list">
+                        <li><i class="fas fa-check"></i> Daily social confidence challenges</li>
+                        <li><i class="fas fa-check"></i> Progress tracking dashboard</li>
+                        <li><i class="fas fa-check"></i> Achievement badges</li>
+                        <li><i class="fas fa-check"></i> Community support</li>
+                    </ul>
+                    <div class="form-group">
+                        <input type="email" id="emailInput" placeholder="Enter your email address">
+                        <button id="submitEmail" class="cta-primary">Start Challenge</button>
+                    </div>
+                    <p id="emailError" class="error-message"></p>
+                    <p id="emailSuccess" class="success-message"></p>
+                </div>
+            </div>
         </section>
 
         <section class="challenge-overview">
@@ -87,14 +82,14 @@
                 <h2>What to Expect</h2>
                 <div class="overview-grid">
                     <div class="overview-item">
-                        <i class="fas fa-handshake"></i>
-                        <h3>Daily Social Tasks</h3>
-                        <p>Simple, actionable social interactions designed to build confidence gradually.</p>
-                    </div>
-                    <div class="overview-item">
                         <i class="fas fa-chart-line"></i>
                         <h3>Progress Tracking</h3>
                         <p>Monitor your journey and see your confidence grow day by day.</p>
+                    </div>
+                    <div class="overview-item">
+                        <i class="fas fa-handshake"></i>
+                        <h3>Daily Social Tasks</h3>
+                        <p>Simple, actionable social interactions designed to build confidence gradually.</p>
                     </div>
                     <div class="overview-item">
                         <i class="fas fa-users"></i>
@@ -106,32 +101,6 @@
                         <h3>Expert Guidance</h3>
                         <p>Access proven social confidence techniques and professional advice.</p>
                     </div>
-                </div>
-            </div>
-        </section>
-
-        <section class="challenge-tracker" id="challengeTracker">
-            <div class="container">
-                <h2>Challenge Progress</h2>
-                <div class="progress-container">
-                    <div class="progress-bar">
-                        <div class="progress" id="progressBar"></div>
-                        <span class="progress-text">0%</span>
-                    </div>
-                    <div class="day-grid" id="dayGrid">
-                        <!-- Days will be populated by JavaScript -->
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <section class="daily-task" id="dailyTask">
-            <div class="container">
-                <h2>Today's Social Challenge</h2>
-                <div class="task-card">
-                    <h3 id="taskTitle">Welcome to Day 1</h3>
-                    <p id="taskDescription">Your journey to social confidence begins today. Click 'Start Challenge' to begin.</p>
-                    <button class="task-button" id="completeTask">Complete Task</button>
                 </div>
             </div>
         </section>
@@ -163,38 +132,6 @@
                 </div>
             </div>
         </section>
-
-        <section class="achievement-section">
-            <div class="container">
-                <h2>Achievement Badges</h2>
-                <div class="badges-grid">
-                    <div class="badge-item">
-                        <div class="badge-icon">
-                            <i class="fas fa-star"></i>
-                        </div>
-                        <span class="badge-name">First Connection</span>
-                    </div>
-                    <div class="badge-item">
-                        <div class="badge-icon">
-                            <i class="fas fa-users"></i>
-                        </div>
-                        <span class="badge-name">Social Butterfly</span>
-                    </div>
-                    <div class="badge-item">
-                        <div class="badge-icon">
-                            <i class="fas fa-crown"></i>
-                        </div>
-                        <span class="badge-name">Confidence Champion</span>
-                    </div>
-                    <div class="badge-item">
-                        <div class="badge-icon">
-                            <i class="fas fa-trophy"></i>
-                        </div>
-                        <span class="badge-name">30-Day Master</span>
-                    </div>
-                </div>
-            </div>
-        </section>
     </main>
 
     <footer>
@@ -211,6 +148,7 @@
                     <ul>
                         <li><a href="about.html">About Us</a></li>
                         <li><a href="events.html">Events</a></li>
+                        <li><a href="challenge.html">30-Day Challenge</a></li>
                         <li><a href="membership.html">Membership</a></li>
                         <li><a href="contact.html">Contact</a></li>
                     </ul>
@@ -231,7 +169,30 @@
         </div>
     </footer>
 
-    <script src="js/main.js"></script>
+    <!-- Firebase SDK -->
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-firestore.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-auth.js"></script>
+    
+    <!-- Our Scripts -->
+    <script src="js/firebase-config.js"></script>
     <script src="js/challenge.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const menuBtn = document.querySelector('.hamburger-btn');
+            const dropdown = document.querySelector('.hamburger-dropdown');
+            
+            menuBtn.addEventListener('click', function(e) {
+                e.stopPropagation();
+                dropdown.classList.toggle('show');
+            });
+
+            document.addEventListener('click', function(e) {
+                if (!menuBtn.contains(e.target) && !dropdown.contains(e.target)) {
+                    dropdown.classList.remove('show');
+                }
+            });
+        });
+    </script>
 </body>
 </html>

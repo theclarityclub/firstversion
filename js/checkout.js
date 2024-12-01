@@ -57,20 +57,95 @@ document.addEventListener('DOMContentLoaded', () => {
         document.getElementById('plan-features').appendChild(featuresList);
     }
 
+    // Check if user is from challenge
+    const challengeEmail = localStorage.getItem('challengeEmail');
+    let challengeData = null;
+
     // Handle form submission
     const form = document.getElementById('payment-form');
-    form.addEventListener('submit', (e) => {
+    form.addEventListener('submit', async (e) => {
         e.preventDefault();
         
-        // Here you would typically:
-        // 1. Validate the form data
-        // 2. Send the payment information to your payment processor
-        // 3. Create the user account
-        // 4. Redirect to a success page or show error
-        
-        // For now, we'll just show an alert
-        alert('Thank you for your purchase! This is a demo - no actual payment was processed.');
-        window.location.href = 'dashboard.html';
+        try {
+            // Show loading state
+            const submitButton = form.querySelector('button[type="submit"]');
+            const originalButtonText = submitButton.textContent;
+            submitButton.disabled = true;
+            submitButton.textContent = 'Processing...';
+
+            // Get form data
+            const formData = new FormData(form);
+            const email = formData.get('email');
+            const name = formData.get('name');
+
+            // Here you would typically process payment with Stripe/PayPal
+            // For demo, we'll skip payment processing
+
+            // If user is from challenge, get their data
+            if (challengeEmail) {
+                const challengeDoc = await db.collection('challenge_participants').doc(challengeEmail).get();
+                if (challengeDoc.exists) {
+                    challengeData = challengeDoc.data();
+                }
+            }
+
+            // Create authenticated user
+            const userCredential = await firebase.auth().createUserWithEmailAndPassword(email, formData.get('password'));
+            const uid = userCredential.user.uid;
+
+            // Create user document
+            await db.collection('users').doc(uid).set({
+                email: email,
+                name: name,
+                plan: planLevel,
+                createdAt: firebase.firestore.FieldValue.serverTimestamp(),
+                challengeCompleted: challengeData ? true : false
+            });
+
+            // Create membership document
+            await db.collection('memberships').doc(uid).set({
+                plan: planLevel,
+                startDate: firebase.firestore.FieldValue.serverTimestamp(),
+                status: 'active',
+                price: parseFloat(planPrice)
+            });
+
+            // If user came from challenge, transfer their progress
+            if (challengeData) {
+                await db.collection('progress').doc(uid).set({
+                    challengeProgress: challengeData.completedDays || [],
+                    currentDay: challengeData.currentDay || 1,
+                    lastCompletionTime: challengeData.lastCompletionTime,
+                    badges: challengeData.badges || {},
+                    transferredFrom: challengeEmail,
+                    transferredAt: firebase.firestore.FieldValue.serverTimestamp()
+                });
+
+                // Mark challenge participant record as converted
+                await db.collection('challenge_participants').doc(challengeEmail).update({
+                    convertedToMember: true,
+                    convertedAt: firebase.firestore.FieldValue.serverTimestamp(),
+                    membershipUid: uid
+                });
+
+                // Clear challenge email from localStorage
+                localStorage.removeItem('challengeEmail');
+            }
+
+            // Show success message
+            alert('Account created successfully! Redirecting to dashboard...');
+            
+            // Redirect to dashboard
+            window.location.href = 'dashboard.html';
+
+        } catch (error) {
+            console.error('Error during checkout:', error);
+            alert('An error occurred during checkout. Please try again.');
+            
+            // Reset button state
+            submitButton.disabled = false;
+            submitButton.textContent = originalButtonText;
+        }
     });
 
     // Basic form validation
@@ -100,4 +175,12 @@ document.addEventListener('DOMContentLoaded', () => {
     cvvInput.addEventListener('input', (e) => {
         e.target.value = e.target.value.replace(/\D/g, '').slice(0, 3);
     });
+
+    // Pre-fill email if coming from challenge
+    if (challengeEmail) {
+        const emailInput = document.getElementById('email');
+        if (emailInput) {
+            emailInput.value = challengeEmail;
+        }
+    }
 });

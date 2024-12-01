@@ -7,29 +7,47 @@
     <link rel="stylesheet" href="css/variables.css">
     <link rel="stylesheet" href="css/styles.css">
     <link rel="stylesheet" href="css/login.css">
+    <link rel="stylesheet" href="css/hamburger.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
 <body>
-    <header class="site-nav">
+    <nav class="site-nav">
         <div class="nav-progressive">
             <div class="nav-primary">
-                <div class="logo">
-                    <a href="index.html">
+                <div class="nav-left">
+                    <a href="index.html" class="logo">
                         <img src="images/logo.svg" alt="The Clarity Club Logo" class="logo-image">
                     </a>
+                    <button class="hamburger-btn" aria-label="Toggle menu">
+                        <span class="hamburger-icon">☰</span>
+                    </button>
                 </div>
+                
+                <!-- Desktop Navigation -->
                 <div class="nav-links">
                     <a href="index.html">Home</a>
+                    <a href="login.html" class="active">Login</a>
                     <a href="events.html">Events</a>
                     <a href="challenge.html">Challenge</a>
-                    <a href="about.html">About</a>
-                    <a href="membership.html">Membership</a>
-                    <a href="blog.html">Blog</a>
-                    <a href="contact.html">Contact</a>
                 </div>
             </div>
         </div>
-    </header>
+    </nav>
+
+    <!-- Hamburger Dropdown Menu -->
+    <div class="hamburger-dropdown">
+        <a href="index.html">Home</a>
+        <a href="about.html">About</a>
+        <a href="membership.html">Membership</a>
+        <a href="blog.html">Blog</a>
+        <a href="events.html">Events</a>
+        <a href="resources.html">Resources</a>
+        <a href="challenge.html">Challenge</a>
+        <a href="progress.html">Progress</a>
+        <a href="dashboard.html">Dashboard</a>
+        <a href="contact.html">Contact</a>
+        <a href="login.html" class="active">Login</a>
+    </div>
 
     <main>
         <section class="login-container">
@@ -115,15 +133,23 @@
         </div>
     </footer>
 
-    <!-- Firebase SDKs -->
-    <script src="https://www.gstatic.com/firebasejs/9.6.0/firebase-app-compat.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/9.6.0/firebase-auth-compat.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/9.6.0/firebase-firestore-compat.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const menuBtn = document.querySelector('.hamburger-btn');
+            const dropdown = document.querySelector('.hamburger-dropdown');
+            
+            menuBtn.addEventListener('click', function(e) {
+                e.stopPropagation();
+                dropdown.classList.toggle('show');
+            });
 
-    <!-- Initialize Firebase -->
-    <script src="js/firebase-config.js"></script>
-
-    <!-- Application Scripts -->
-    <script src="js/login.js"></script>
+            document.addEventListener('click', function(e) {
+                if (!menuBtn.contains(e.target) && !dropdown.contains(e.target)) {
+                    dropdown.classList.remove('show');
+                }
+            });
+        });
+    </script>
+    <script src="js/main.js"></script>
 </body>
 </html>

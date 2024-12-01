@@ -6,122 +6,166 @@
     <title>The Clarity Club</title>
     <link rel="stylesheet" href="css/variables.css">
     <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="css/hamburger.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        .glow-button {
+            position: relative;
+            display: inline-block;
+            padding: 12px 32px;
+            color: white;
+            text-decoration: none;
+            font-size: 18px;
+            font-weight: 500;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            border-radius: 8px;
+            background: rgba(147, 112, 219, 0.1);
+            transition: all 0.3s;
+            overflow: hidden;
+        }
+
+        .glow-button::before {
+            content: '';
+            position: absolute;
+            top: -2px;
+            left: -2px;
+            right: -2px;
+            bottom: -2px;
+            background: linear-gradient(45deg, #9370DB, #8A2BE2);
+            border-radius: 10px;
+            z-index: -1;
+            opacity: 0.3;
+            filter: blur(10px);
+            animation: glowPulse 2s ease-in-out infinite;
+        }
+
+        .glow-button::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            border-radius: 8px;
+            background: rgba(147, 112, 219, 0.1);
+            z-index: -1;
+            transition: all 0.3s;
+        }
+
+        .glow-button:hover {
+            transform: translateY(-2px);
+            background: white;
+            color: #1E293B;
+        }
+
+        .glow-button:hover::before {
+            opacity: 0.5;
+        }
+
+        @keyframes glowPulse {
+            0%, 100% {
+                opacity: 0.3;
+                transform: scale(1);
+            }
+            50% {
+                opacity: 0.5;
+                transform: scale(1.1);
+            }
+        }
+    </style>
 </head>
 <body>
-    <header class="site-nav">
+    <!-- Top Navigation -->
+    <nav class="site-nav">
         <div class="nav-progressive">
             <div class="nav-primary">
-                <div class="logo">
-                    <a href="index.html">
+                <div class="nav-left">
+                    <a href="index.html" class="logo">
                         <img src="images/logo.svg" alt="The Clarity Club Logo" class="logo-image">
                     </a>
+                    <button class="hamburger-btn" aria-label="Toggle menu">
+                        <span class="hamburger-icon">☰</span>
+                    </button>
                 </div>
+                
                 <div class="nav-links">
                     <a href="index.html" class="active">Home</a>
-                    <a href="events.html">Events</a>
-                    <a href="about.html">About</a>
-                    <a href="membership.html">Membership</a>
-                    <a href="blog.html">Blog</a>
-                    <a href="contact.html">Contact</a>
                     <a href="login.html">Login</a>
-                </div>
-            </div>
-            <div class="nav-secondary" data-visible="false">
-                <div class="auth-buttons">
-                    <button class="cta-primary">Sign Up</button>
+                    <a href="events.html">Events</a>
+                    <a href="challenge.html">Challenge</a>
                 </div>
             </div>
         </div>
-    </header>
+    </nav>
 
+    <!-- Hamburger Dropdown Menu -->
+    <div class="hamburger-dropdown">
+        <a href="index.html" class="active">Home</a>
+        <a href="about.html">About</a>
+        <a href="membership.html">Membership</a>
+        <a href="blog.html">Blog</a>
+        <a href="events.html">Events</a>
+        <a href="resources.html">Resources</a>
+        <a href="challenge.html">Challenge</a>
+        <a href="progress.html">Progress</a>
+        <a href="dashboard.html">Dashboard</a>
+        <a href="contact.html">Contact</a>
+        <a href="login.html">Login</a>
+    </div>
+
+    <!-- Main Content -->
     <main>
         <section class="hero-stack">
-            <span class="overline">The Clarity Club</span>
-            <h1>Find Real Connection</h1>
-            <p class="lead">Meaningful interactions, curated experiences</p>
-            <button class="cta-primary">Join Next Event</button>
-        </section>
-
-        <section class="content-stack">
             <div class="container">
-                <h2>What We Offer</h2>
-                <div class="grid">
-                    <div class="feature-card">
-                        <i class="fas fa-calendar-alt"></i>
-                        <h3>Exclusive Events</h3>
-                        <p>Join our curated events designed for personal growth</p>
-                        <div class="hover-reveal">
-                            <a href="events.html" class="cta-primary">View Events</a>
-                        </div>
-                    </div>
-                    <div class="feature-card">
-                        <i class="fas fa-users"></i>
-                        <h3>Community</h3>
-                        <p>Connect with like-minded individuals</p>
-                        <div class="hover-reveal">
-                            <a href="membership.html" class="cta-primary">Join Now</a>
-                        </div>
-                    </div>
-                    <div class="feature-card">
-                        <i class="fas fa-book-reader"></i>
-                        <h3>Resources</h3>
-                        <p>Access our extensive library of learning materials</p>
-                        <div class="hover-reveal">
-                            <a href="resources.html" class="cta-primary">Browse Library</a>
-                        </div>
-                    </div>
-                </div>
+                <span class="overline">Welcome to</span>
+                <h1>The Clarity Club</h1>
+                <p class="lead">Your journey to clarity begins here</p>
+                <a href="membership.html" class="glow-button">Join Now</a>
             </div>
         </section>
 
         <section class="content-stack">
             <div class="container">
-                <h2>Upcoming Events</h2>
-                <div class="events-grid">
-                    <!-- Event cards will be dynamically populated -->
-                </div>
-                <div class="disclosure-trigger">
-                    <button class="cta-primary">View All Events</button>
-                </div>
-                <div class="disclosure-content" data-visible="false">
-                    <div class="grid">
-                        <!-- Additional events will be shown here -->
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <section class="content-stack">
-            <div class="container">
-                <h2>Member Stories</h2>
+                <h2>Featured Content</h2>
                 <div class="grid">
                     <div class="feature-card">
-                        <i class="fas fa-quote-left"></i>
-                        <p>"The Clarity Club has transformed how I approach personal growth. The community here is incredible."</p>
-                        <div class="hover-reveal">
-                            <span class="small">Sarah M. - Member since 2023</span>
-                        </div>
+                        <i class="fas fa-gem"></i>
+                        <h3>Premium Community</h3>
+                        <p>Join an exclusive network of ambitious individuals committed to personal growth and mutual support.</p>
+                        <p class="hover-reveal">
+                            <i class="fas fa-circle-check"></i> VIP Mastermind Groups<br>
+                            <i class="fas fa-circle-check"></i> Expert-Led Workshops<br>
+                            <i class="fas fa-circle-check"></i> Exclusive Events Access<br>
+                            <i class="fas fa-circle-check"></i> Private Community Forum
+                        </p>
                     </div>
+
                     <div class="feature-card">
-                        <i class="fas fa-quote-left"></i>
-                        <p>"I've made meaningful connections and learned so much from the diverse perspectives here."</p>
-                        <div class="hover-reveal">
-                            <span class="small">James R. - Member since 2022</span>
-                        </div>
+                        <i class="fas fa-lightbulb"></i>
+                        <h3>Transformative Growth</h3>
+                        <p>Experience breakthrough moments with our scientifically-backed personal development programs.</p>
+                        <p class="hover-reveal">
+                            <i class="fas fa-circle-check"></i> Personalized Action Plans<br>
+                            <i class="fas fa-circle-check"></i> 1-on-1 Coaching Sessions<br>
+                            <i class="fas fa-circle-check"></i> Advanced Learning Tools<br>
+                            <i class="fas fa-circle-check"></i> Progress Visualization
+                        </p>
                     </div>
+
                     <div class="feature-card">
-                        <i class="fas fa-quote-left"></i>
-                        <p>"The events and workshops have given me practical tools for personal development."</p>
-                        <div class="hover-reveal">
-                            <span class="small">Emily K. - Member since 2023</span>
-                        </div>
+                        <i class="fas fa-crown"></i>
+                        <h3>Elite Resources</h3>
+                        <p>Access a curated collection of premium tools and resources designed for exceptional results.</p>
+                        <p class="hover-reveal">
+                            <i class="fas fa-circle-check"></i> Success Blueprints<br>
+                            <i class="fas fa-circle-check"></i> Achievement Tracking<br>
+                            <i class="fas fa-circle-check"></i> Resource Library<br>
+                            <i class="fas fa-circle-check"></i> Members-Only Content
+                        </p>
                     </div>
                 </div>
             </div>
         </section>
     </main>
 
+    <!-- Footer -->
     <footer>
         <div class="container">
             <div class="footer-content">
@@ -136,6 +180,7 @@
                     <ul>
                         <li><a href="about.html">About Us</a></li>
                         <li><a href="events.html">Events</a></li>
+                        <li><a href="challenge.html">30-Day Challenge</a></li>
                         <li><a href="membership.html">Membership</a></li>
                         <li><a href="contact.html">Contact</a></li>
                     </ul>
@@ -156,6 +201,23 @@
         </div>
     </footer>
 
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const menuBtn = document.querySelector('.hamburger-btn');
+            const dropdown = document.querySelector('.hamburger-dropdown');
+            
+            menuBtn.addEventListener('click', function(e) {
+                e.stopPropagation();
+                dropdown.classList.toggle('show');
+            });
+
+            document.addEventListener('click', function(e) {
+                if (!menuBtn.contains(e.target) && !dropdown.contains(e.target)) {
+                    dropdown.classList.remove('show');
+                }
+            });
+        });
+    </script>
     <script src="js/main.js"></script>
 </body>
 </html>

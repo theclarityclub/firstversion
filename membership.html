@@ -7,35 +7,33 @@
     <link rel="stylesheet" href="css/variables.css">
     <link rel="stylesheet" href="css/styles.css">
     <link rel="stylesheet" href="css/membership.css">
+    <link rel="stylesheet" href="css/hamburger.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
 <body>
-    <header class="site-nav">
+    <nav class="site-nav">
         <div class="nav-progressive">
             <div class="nav-primary">
-                <div class="logo">
-                    <a href="index.html">
-                        <img src="images/logo.svg" alt="The Clarity Club Logo" class="logo-image">
-                    </a>
-                </div>
+                <a href="index.html" class="logo">
+                    <img src="images/logo.svg" alt="The Clarity Club Logo" class="logo-image">
+                </a>
+                
+                <!-- Desktop Navigation -->
                 <div class="nav-links">
                     <a href="index.html">Home</a>
-                    <a href="events.html">Events</a>
-                    <a href="challenge.html">Challenge</a>
                     <a href="about.html">About</a>
                     <a href="membership.html" class="active">Membership</a>
                     <a href="blog.html">Blog</a>
+                    <a href="events.html">Events</a>
+                    <a href="resources.html">Resources</a>
+                    <a href="challenge.html">Challenge</a>
+                    <a href="progress.html">Progress</a>
+                    <a href="dashboard.html">Dashboard</a>
                     <a href="contact.html">Contact</a>
                 </div>
             </div>
-            <div class="nav-secondary" data-visible="false">
-                <div class="auth-buttons">
-                    <button class="cta-primary">Login</button>
-                    <button class="cta-primary">Sign Up</button>
-                </div>
-            </div>
         </div>
-    </header>
+    </nav>
 
     <main>
         <section class="membership-hero">
@@ -190,6 +188,7 @@
         </div>
     </footer>
 
+    <script src="js/hamburger.js"></script>
     <script src="js/main.js"></script>
 </body>
 </html>

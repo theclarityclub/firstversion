@@ -7,40 +7,33 @@
     <link rel="stylesheet" href="css/variables.css">
     <link rel="stylesheet" href="css/styles.css">
     <link rel="stylesheet" href="css/dashboard.css">
+    <link rel="stylesheet" href="css/hamburger.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
 <body>
-    <header class="site-nav">
+    <nav class="site-nav">
         <div class="nav-progressive">
             <div class="nav-primary">
-                <div class="logo">
-                    <a href="index.html">
-                        <img src="images/logo.svg" alt="The Clarity Club Logo" class="logo-image">
-                    </a>
-                </div>
+                <a href="index.html" class="logo">
+                    <img src="images/logo.svg" alt="The Clarity Club Logo" class="logo-image">
+                </a>
+                
+                <!-- Desktop Navigation -->
                 <div class="nav-links">
                     <a href="index.html">Home</a>
-                    <a href="events.html">Events</a>
-                    <a href="challenge.html">Challenge</a>
                     <a href="about.html">About</a>
                     <a href="membership.html">Membership</a>
                     <a href="blog.html">Blog</a>
+                    <a href="events.html">Events</a>
+                    <a href="resources.html">Resources</a>
+                    <a href="challenge.html">Challenge</a>
+                    <a href="progress.html">Progress</a>
+                    <a href="dashboard.html" class="active">Dashboard</a>
                     <a href="contact.html">Contact</a>
                 </div>
             </div>
-            <div class="nav-secondary">
-                <div class="user-menu">
-                    <button class="user-menu-button">
-                        <i class="fas fa-user-circle"></i>
-                        <span class="username">Loading...</span>
-                    </button>
-                    <div class="dropdown-menu">
-                        <a href="#" class="sign-out">Sign Out</a>
-                    </div>
-                </div>
-            </div>
         </div>
-    </header>
+    </nav>
 
     <main class="dashboard">
         <div class="dashboard-header">
@@ -49,66 +42,96 @@
         </div>
 
         <div class="dashboard-grid">
+            <!-- Growth Tree Visualization -->
+            <section class="dashboard-card growth-tree-card">
+                <h2><i class="fas fa-tree"></i> Your Growth Tree</h2>
+                <div class="growth-tree">
+                    <canvas id="treeCanvas"></canvas>
+                    <div class="tree-stats">
+                        <div class="tree-stat">
+                            <i class="fas fa-leaf"></i>
+                            <span>Skills Mastered: <span class="skills-count">0</span></span>
+                        </div>
+                        <div class="tree-stat">
+                            <i class="fas fa-seedling"></i>
+                            <span>Growing Skills: <span class="growing-count">0</span></span>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Daily Lessons -->
+            <section class="dashboard-card lessons-card">
+                <h2><i class="fas fa-book-reader"></i> Today's Lessons</h2>
+                <div class="daily-lessons">
+                    <div class="lesson-progress">
+                        <div class="progress-ring">
+                            <svg>
+                                <circle class="progress-ring-circle" cx="60" cy="60" r="54"></circle>
+                            </svg>
+                            <span class="progress-text">0/3</span>
+                        </div>
+                        <p>Daily Lessons Complete</p>
+                    </div>
+                    <div class="lessons-list">
+                        <!-- Lessons will be loaded dynamically -->
+                    </div>
+                </div>
+            </section>
+
+            <!-- Points & Rewards -->
+            <section class="dashboard-card rewards-card">
+                <h2><i class="fas fa-star"></i> Clarity Points</h2>
+                <div class="points-display">
+                    <div class="points-circle">
+                        <span class="points">0</span>
+                        <span class="points-label">points</span>
+                    </div>
+                </div>
+                <div class="points-breakdown">
+                    <h3>Today's Points</h3>
+                    <ul class="points-list">
+                        <li>
+                            <span>Daily Check-in</span>
+                            <span class="points-value">+50</span>
+                        </li>
+                        <li>
+                            <span>Lessons Completed</span>
+                            <span class="points-value">+0/300</span>
+                        </li>
+                        <li>
+                            <span>Challenge Progress</span>
+                            <span class="points-value">+0/150</span>
+                        </li>
+                    </ul>
+                </div>
+                <div class="rewards-progress">
+                    <p>250 points until next reward</p>
+                    <div class="progress-bar">
+                        <div class="progress" style="width: 0%"></div>
+                    </div>
+                </div>
+            </section>
+
             <!-- Progress Overview -->
             <section class="dashboard-card progress-card">
                 <h2><i class="fas fa-chart-line"></i> Your Progress</h2>
                 <div class="progress-stats">
                     <div class="stat">
                         <h3>Challenges Completed</h3>
-                        <p class="stat-value">12</p>
+                        <p class="stat-value">0</p>
                     </div>
                     <div class="stat">
                         <h3>Current Streak</h3>
-                        <p class="stat-value">5 days</p>
+                        <p class="stat-value">0 days</p>
                     </div>
                     <div class="stat">
                         <h3>Total Practice Time</h3>
-                        <p class="stat-value">24 hours</p>
+                        <p class="stat-value">0 hours</p>
                     </div>
                 </div>
                 <div class="progress-chart">
                     <!-- Progress chart will be rendered here -->
-                </div>
-            </section>
-
-            <!-- Reward Points -->
-            <section class="dashboard-card rewards-card">
-                <h2><i class="fas fa-star"></i> Reward Points</h2>
-                <div class="points-display">
-                    <div class="points-circle">
-                        <span class="points">750</span>
-                        <span class="points-label">points</span>
-                    </div>
-                </div>
-                <div class="rewards-progress">
-                    <p>250 points until next reward</p>
-                    <div class="progress-bar">
-                        <div class="progress" style="width: 75%"></div>
-                    </div>
-                </div>
-                <a href="#" class="cta-secondary">View Rewards</a>
-            </section>
-
-            <!-- Membership Information -->
-            <section class="dashboard-card membership-card">
-                <h2><i class="fas fa-id-card"></i> Membership Details</h2>
-                <div class="membership-details">
-                    <div class="detail-item">
-                        <span class="label">Plan:</span>
-                        <span class="value">Premium</span>
-                    </div>
-                    <div class="detail-item">
-                        <span class="label">Member Since:</span>
-                        <span class="value">January 15, 2024</span>
-                    </div>
-                    <div class="detail-item">
-                        <span class="label">Next Billing:</span>
-                        <span class="value">February 15, 2024</span>
-                    </div>
-                </div>
-                <div class="membership-actions">
-                    <a href="#" class="cta-secondary">Manage Plan</a>
-                    <a href="#" class="cta-secondary">Billing History</a>
                 </div>
             </section>
 
@@ -158,13 +181,7 @@
         </div>
     </footer>
 
-    <!-- Firebase Scripts -->
-    <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-app-compat.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-auth-compat.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore-compat.js"></script>
-    
-    <!-- Application Scripts -->
-    <script src="js/firebase-config.js"></script>
-    <script src="js/dashboard.js"></script>
+    <script src="js/hamburger.js"></script>
+    <script src="js/main.js"></script>
 </body>
 </html>

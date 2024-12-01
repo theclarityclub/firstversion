@@ -1,0 +1,64 @@
+.animated-button-wrapper {
+  position: relative;
+  display: inline-block;
+  margin: 20px 0;
+}
+
+.animated-button {
+  position: relative;
+  z-index: 10;
+  display: inline-block;
+  padding: 12px 32px;
+  color: white;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  border-radius: 8px;
+  font-weight: 500;
+  font-size: 18px;
+  text-decoration: none;
+  transition: all 0.3s;
+  background: rgba(147, 112, 219, 0.1);
+}
+
+.animated-button:hover {
+  background-color: white;
+  color: #1E293B;
+  transform: translateY(-2px);
+}
+
+.inner-glow {
+  position: absolute;
+  inset: 0;
+  z-index: -10;
+  border-radius: 8px;
+  opacity: 0.3;
+  background: rgba(147, 112, 219, 0.5);
+  transition: opacity 0.3s;
+  box-shadow: 0 0 15px rgba(147, 112, 219, 0.5);
+}
+
+.animated-button:hover + .inner-glow {
+  opacity: 0.5;
+}
+
+.outer-glow {
+  position: absolute;
+  inset: -8px;
+  z-index: -20;
+  border-radius: 12px;
+  opacity: 0.3;
+  background: rgba(147, 112, 219, 0.3);
+  filter: blur(15px);
+  box-shadow: 0 0 20px rgba(147, 112, 219, 0.4);
+  animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+@keyframes pulse {
+  0%, 100% {
+    opacity: 0.3;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.5;
+    transform: scale(1.05);
+  }
+}

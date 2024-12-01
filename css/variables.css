@@ -1,17 +1,22 @@
 :root {
     /* Color Palette */
     --primary-dark: #2C5364;
+    --primary-dark-rgb: 44, 83, 100;  /* RGB values for primary-dark */
     --secondary-dark: #203A43;
     --primary-light: #BBE1FA;
     --neutral-light: #F5F5F5;
     --accent-gray: #A7B8C9;
     --accent-purple: #8E54E9;
     --accent-purple-light: #A76AF5;
+    --accent-secondary: #4776E6;
+    --accent-purple-rgb: 142, 84, 233;
     --accent-gradient: linear-gradient(135deg, #8E54E9, #4776E6);
     --card-gradient: linear-gradient(135deg, #ffffff, #f8f9fa);
     --color-primary: var(--accent-purple);
     --primary-rgb: 142, 84, 233; /* RGB values for accent-purple */
     --hero-gradient: linear-gradient(135deg, #2C5364, #203A43);
+    --error: #dc3545;
+    --success: #28a745;
 
     /* Typography Scale */
     --h1: 4.5rem;    /* 72px */
@@ -136,12 +141,12 @@
 
 @keyframes pulse {
     0% {
-        box-shadow: 0 0 0 0 rgba(142, 84, 233, 0.4);
+        box-shadow: 0 0 0 0 rgba(44, 83, 100, 0.4);
     }
     70% {
-        box-shadow: 0 0 0 10px rgba(142, 84, 233, 0);
+        box-shadow: 0 0 0 10px rgba(44, 83, 100, 0);
     }
     100% {
-        box-shadow: 0 0 0 0 rgba(142, 84, 233, 0);
+        box-shadow: 0 0 0 0 rgba(44, 83, 100, 0);
     }
 }

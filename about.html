@@ -7,123 +7,71 @@
     <link rel="stylesheet" href="css/variables.css">
     <link rel="stylesheet" href="css/styles.css">
     <link rel="stylesheet" href="css/about.css">
+    <link rel="stylesheet" href="css/hamburger.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
 <body>
-    <header class="site-nav">
+    <nav class="site-nav">
         <div class="nav-progressive">
             <div class="nav-primary">
-                <div class="logo">
-                    <a href="index.html">
-                        <img src="images/logo.svg" alt="The Clarity Club Logo" class="logo-image">
-                    </a>
-                </div>
+                <a href="index.html" class="logo">
+                    <img src="images/logo.svg" alt="The Clarity Club Logo" class="logo-image">
+                </a>
+                
+                <!-- Desktop Navigation -->
                 <div class="nav-links">
                     <a href="index.html">Home</a>
-                    <a href="events.html">Events</a>
-                    <a href="challenge.html">Challenge</a>
                     <a href="about.html" class="active">About</a>
                     <a href="membership.html">Membership</a>
                     <a href="blog.html">Blog</a>
+                    <a href="events.html">Events</a>
+                    <a href="resources.html">Resources</a>
+                    <a href="challenge.html">Challenge</a>
+                    <a href="progress.html">Progress</a>
+                    <a href="dashboard.html">Dashboard</a>
                     <a href="contact.html">Contact</a>
                 </div>
             </div>
-            <div class="nav-secondary" data-visible="false">
-                <div class="auth-buttons">
-                    <button class="cta-primary">Login</button>
-                    <button class="cta-primary">Sign Up</button>
-                </div>
-            </div>
         </div>
-    </header>
+    </nav>
 
     <main>
-        <section class="about-hero">
-            <h1>About The Clarity Club</h1>
-            <p>Discover our story and mission to help you achieve mental clarity and personal growth.</p>
+        <section class="hero-stack">
+            <div class="container">
+                <span class="overline">About Us</span>
+                <h1>Our Story</h1>
+                <p class="lead">Empowering personal growth through clarity and connection</p>
+            </div>
         </section>
 
-        <section class="about-content">
+        <section class="content-stack">
             <div class="container">
-                <div class="about-section">
-                    <h2>Our Story</h2>
-                    <div class="mission-section">
-                        <i class="fas fa-book-open"></i>
-                        <p>The Clarity Club was founded with a simple yet powerful mission: to help individuals discover their inner clarity and achieve their full potential. Our journey began when a group of mindfulness practitioners, mental health professionals, and personal development experts came together with a shared vision.</p>
-                    </div>
-                </div>
+                <div class="about-content">
+                    <h2>Welcome to The Clarity Club</h2>
+                    <p>The Clarity Club was founded with a simple yet powerful mission: to help individuals find clarity in their personal and professional lives through meaningful connections and guided personal development.</p>
+                    
+                    <h3>Our Mission</h3>
+                    <p>We believe that everyone deserves access to the tools, resources, and community support needed to achieve their full potential. Through our platform, we provide:</p>
+                    <ul>
+                        <li>Expert-led workshops and seminars</li>
+                        <li>Personalized growth resources</li>
+                        <li>Community support and networking</li>
+                        <li>Goal-setting and tracking tools</li>
+                    </ul>
 
-                <div class="about-section">
-                    <h2>Our Mission</h2>
-                    <div class="mission-section">
-                        <i class="fas fa-bullseye"></i>
-                        <p>We are dedicated to providing a supportive community and practical tools for individuals seeking mental clarity, emotional balance, and personal growth. Through our events, workshops, and resources, we aim to empower our members to live more mindful and purposeful lives.</p>
-                    </div>
-                </div>
-
-                <div class="about-section">
-                    <h2>Our Values</h2>
+                    <h3>Our Values</h3>
                     <div class="values-grid">
-                        <div class="value-item">
-                            <i class="fas fa-heart"></i>
-                            <h3>Authenticity</h3>
-                            <p>We believe in being genuine and true in all interactions</p>
+                        <div class="value-card">
+                            <h4>Authenticity</h4>
+                            <p>We encourage genuine self-expression and honest connections.</p>
                         </div>
-                        <div class="value-item">
-                            <i class="fas fa-arrow-trend-up"></i>
-                            <h3>Growth</h3>
-                            <p>Committed to continuous personal development</p>
+                        <div class="value-card">
+                            <h4>Growth</h4>
+                            <p>We believe in continuous learning and personal development.</p>
                         </div>
-                        <div class="value-item">
-                            <i class="fas fa-hands-holding-circle"></i>
-                            <h3>Respect</h3>
-                            <p>Honoring each individual's unique journey</p>
-                        </div>
-                        <div class="value-item">
-                            <i class="fas fa-users"></i>
-                            <h3>Community</h3>
-                            <p>Supporting each other through shared experiences</p>
-                        </div>
-                        <div class="value-item">
-                            <i class="fas fa-star"></i>
-                            <h3>Excellence</h3>
-                            <p>Striving for the highest quality in everything we do</p>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="about-section">
-                    <h2>Our Team</h2>
-                    <div class="team-grid">
-                        <div class="team-member">
-                            <i class="fas fa-user-circle"></i>
-                            <h3>Sarah Johnson</h3>
-                            <p class="role">Founder & Lead Facilitator</p>
-                            <p>With over 15 years of experience in mindfulness and personal development.</p>
-                            <div class="social-links">
-                                <a href="#"><i class="fab fa-linkedin"></i></a>
-                                <a href="#"><i class="fab fa-twitter"></i></a>
-                            </div>
-                        </div>
-                        <div class="team-member">
-                            <i class="fas fa-user-circle"></i>
-                            <h3>Michael Chen</h3>
-                            <p class="role">Mental Health Professional</p>
-                            <p>Licensed therapist specializing in cognitive behavioral therapy.</p>
-                            <div class="social-links">
-                                <a href="#"><i class="fab fa-linkedin"></i></a>
-                                <a href="#"><i class="fab fa-twitter"></i></a>
-                            </div>
-                        </div>
-                        <div class="team-member">
-                            <i class="fas fa-user-circle"></i>
-                            <h3>Emma Rodriguez</h3>
-                            <p class="role">Community Manager</p>
-                            <p>Passionate about building meaningful connections and fostering growth.</p>
-                            <div class="social-links">
-                                <a href="#"><i class="fab fa-linkedin"></i></a>
-                                <a href="#"><i class="fab fa-twitter"></i></a>
-                            </div>
+                        <div class="value-card">
+                            <h4>Community</h4>
+                            <p>We foster a supportive environment where everyone belongs.</p>
                         </div>
                     </div>
                 </div>
@@ -166,6 +114,7 @@
         </div>
     </footer>
 
+    <script src="js/hamburger.js"></script>
     <script src="js/main.js"></script>
 </body>
 </html>

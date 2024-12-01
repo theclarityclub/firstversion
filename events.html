@@ -7,36 +7,86 @@
     <link rel="stylesheet" href="css/variables.css">
     <link rel="stylesheet" href="css/styles.css">
     <link rel="stylesheet" href="css/events.css">
+    <link rel="stylesheet" href="css/hamburger.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/js/all.min.js"></script>
 </head>
 <body>
-    <header class="site-nav">
+    <nav class="site-nav">
         <div class="nav-progressive">
             <div class="nav-primary">
-                <div class="logo">
-                    <a href="index.html">
+                <div class="nav-left">
+                    <a href="index.html" class="logo">
                         <img src="images/logo.svg" alt="The Clarity Club Logo" class="logo-image">
                     </a>
+                    <button class="hamburger-btn" aria-label="Toggle menu">
+                        <span class="hamburger-icon">☰</span>
+                    </button>
                 </div>
+                
+                <!-- Desktop Navigation -->
                 <div class="nav-links">
                     <a href="index.html">Home</a>
+                    <a href="login.html">Login</a>
                     <a href="events.html" class="active">Events</a>
                     <a href="challenge.html">Challenge</a>
-                    <a href="about.html">About</a>
-                    <a href="membership.html">Membership</a>
-                    <a href="blog.html">Blog</a>
-                    <a href="contact.html">Contact</a>
-                </div>
-            </div>
-            <div class="nav-secondary" data-visible="false">
-                <div class="auth-buttons">
-                    <button class="cta-primary">Login</button>
-                    <button class="cta-primary">Sign Up</button>
                 </div>
             </div>
         </div>
-    </header>
+    </nav>
+
+    <!-- Hamburger Dropdown Menu -->
+    <div class="hamburger-dropdown">
+        <a href="index.html">Home</a>
+        <a href="about.html">About</a>
+        <a href="membership.html">Membership</a>
+        <a href="blog.html">Blog</a>
+        <a href="events.html" class="active">Events</a>
+        <a href="resources.html">Resources</a>
+        <a href="challenge.html">Challenge</a>
+        <a href="progress.html">Progress</a>
+        <a href="dashboard.html">Dashboard</a>
+        <a href="contact.html">Contact</a>
+        <a href="login.html">Login</a>
+    </div>
+
+    <!-- Event Details Popup -->
+    <div class="event-popup-overlay">
+        <div class="event-popup">
+            <div class="event-popup-header">
+                <h2 class="event-popup-title"></h2>
+                <button class="event-popup-close">
+                    <i class="fa-solid fa-times"></i>
+                </button>
+            </div>
+            <div class="event-popup-content">
+                <div class="event-popup-meta">
+                    <div class="event-popup-meta-item">
+                        <i class="fa-solid fa-calendar"></i>
+                        <span class="event-popup-date"></span>
+                    </div>
+                    <div class="event-popup-meta-item">
+                        <i class="fa-solid fa-clock"></i>
+                        <span class="event-popup-time"></span>
+                    </div>
+                    <div class="event-popup-meta-item">
+                        <i class="fa-solid fa-location-dot"></i>
+                        <span class="event-popup-location"></span>
+                    </div>
+                    <div class="event-popup-meta-item">
+                        <i class="fa-solid fa-tag"></i>
+                        <span class="event-popup-category"></span>
+                    </div>
+                </div>
+                <p class="event-popup-description"></p>
+                <div class="event-popup-actions">
+                    <button class="event-popup-register">Register Now</button>
+                    <button class="event-popup-share">
+                        <i class="fa-solid fa-share-alt"></i> Share
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
 
     <main class="events-page">
         <section class="events-hero">
@@ -136,10 +186,10 @@
                 <div class="footer-section">
                     <h3>Connect With Us</h3>
                     <div class="social-links">
-                        <a href="#"><i class="fa-brands fa-facebook"></i></a>
-                        <a href="#"><i class="fa-brands fa-twitter"></i></a>
-                        <a href="#"><i class="fa-brands fa-instagram"></i></a>
-                        <a href="#"><i class="fa-brands fa-linkedin"></i></a>
+                        <a href="#"><i class="fab fa-facebook"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-linkedin"></i></a>
                     </div>
                 </div>
             </div>
@@ -149,6 +199,23 @@
         </div>
     </footer>
 
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const menuBtn = document.querySelector('.hamburger-btn');
+            const dropdown = document.querySelector('.hamburger-dropdown');
+            
+            menuBtn.addEventListener('click', function(e) {
+                e.stopPropagation();
+                dropdown.classList.toggle('show');
+            });
+
+            document.addEventListener('click', function(e) {
+                if (!menuBtn.contains(e.target) && !dropdown.contains(e.target)) {
+                    dropdown.classList.remove('show');
+                }
+            });
+        });
+    </script>
     <script src="js/events.js"></script>
 </body>
 </html>

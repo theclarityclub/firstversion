@@ -1,17 +1,6 @@
 // Debug logging
 console.log('Login script loaded');
 
-// Wait for Firebase to initialize
-let firebaseInitialized = false;
-const firebaseCheck = setInterval(() => {
-    if (window.firebase && firebase.auth) {
-        clearInterval(firebaseCheck);
-        firebaseInitialized = true;
-        console.log('Firebase initialized successfully');
-        initializeApp();
-    }
-}, 100);
-
 // Initialize app after Firebase is ready
 function initializeApp() {
     // DOM Elements
@@ -20,6 +9,7 @@ function initializeApp() {
     const passwordInput = document.getElementById('password');
     const togglePasswordBtn = document.querySelector('.toggle-password');
     const googleLoginBtn = document.getElementById('googleSignIn');
+    const rememberMeCheckbox = document.getElementById('remember');
 
     console.log('DOM elements found:', {
         form: !!loginForm,
@@ -43,17 +33,19 @@ function initializeApp() {
         e.preventDefault();
         console.log('Form submitted');
         
-        const email = emailInput.value;
+        const email = emailInput.value.trim();
         const password = passwordInput.value;
+        const persistence = rememberMeCheckbox.checked ? 
+            firebase.auth.Auth.Persistence.LOCAL : 
+            firebase.auth.Auth.Persistence.SESSION;
 
         // Get submit button reference
         const submitBtn = loginForm.querySelector('button[type="submit"]');
         const originalText = submitBtn.textContent;
 
         try {
-            if (!firebaseInitialized) {
-                throw new Error('Firebase not initialized');
-            }
+            // Set persistence first
+            await firebase.auth().setPersistence(persistence);
 
             // Show loading state
             submitBtn.disabled = true;
@@ -65,48 +57,76 @@ function initializeApp() {
                 await firebase.auth().signInWithEmailAndPassword(email, password);
                 console.log('Sign in successful');
             } catch (signInError) {
+                console.log('Sign in error:', signInError.code);
+                
                 // If sign in fails due to user not found, try to create account
                 if (signInError.code === 'auth/user-not-found') {
                     console.log('User not found, attempting to create account');
                     submitBtn.textContent = 'Creating account...';
+                    
+                    // Create new user
                     const userCredential = await firebase.auth().createUserWithEmailAndPassword(email, password);
-                    console.log('Account created successfully:', userCredential);
+                    console.log('Account created successfully');
                     
                     // Create initial user document in Firestore
                     await firebase.firestore().collection('users').doc(userCredential.user.uid).set({
                         email: email,
                         displayName: email.split('@')[0],
                         createdAt: new Date().toISOString(),
-                        lastLogin: new Date().toISOString()
+                        lastLogin: new Date().toISOString(),
+                        points: 0,
+                        progress: 0,
+                        completedLessons: 0,
+                        masteredSkills: 0,
+                        growingSkills: 0
                     });
+                    
+                    console.log('User document created in Firestore');
                 } else {
                     // If error is not user-not-found, rethrow it
                     throw signInError;
                 }
             }
             
-            // Redirect to dashboard on success
-            window.location.href = 'dashboard.html';
+            // Update last login time
+            if (firebase.auth().currentUser) {
+                await firebase.firestore().collection('users').doc(firebase.auth().currentUser.uid).update({
+                    lastLogin: new Date().toISOString()
+                });
+            }
+            
+            // Get redirect URL from session storage or default to dashboard
+            const redirectUrl = sessionStorage.getItem('redirectUrl') || 'dashboard.html';
+            sessionStorage.removeItem('redirectUrl'); // Clear the stored URL
+            window.location.href = redirectUrl;
+            
         } catch (error) {
-            console.error('Sign in/registration error:', error);
+            console.error('Authentication error:', error);
+            
             // Handle specific error cases
             let errorMessage = 'Failed to sign in. Please try again.';
             
             switch (error.code) {
                 case 'auth/wrong-password':
-                    errorMessage = 'Incorrect password.';
+                    errorMessage = 'Incorrect password. Please try again.';
                     break;
                 case 'auth/invalid-email':
-                    errorMessage = 'Invalid email address.';
+                    errorMessage = 'Please enter a valid email address.';
                     break;
                 case 'auth/too-many-requests':
                     errorMessage = 'Too many failed attempts. Please try again later.';
                     break;
                 case 'auth/weak-password':
-                    errorMessage = 'Password should be at least 6 characters.';
+                    errorMessage = 'Password should be at least 6 characters long.';
                     break;
                 case 'auth/email-already-in-use':
                     errorMessage = 'An account already exists with this email.';
+                    break;
+                case 'auth/network-request-failed':
+                    errorMessage = 'Network error. Please check your connection.';
+                    break;
+                case 'auth/internal-error':
+                    errorMessage = 'Authentication service is temporarily unavailable. Please try again later.';
                     break;
             }
             
@@ -121,7 +141,7 @@ function initializeApp() {
         }
     });
 
-    // Handle Google sign-in using popup
+    // Handle Google sign-in
     if (googleLoginBtn) {
         console.log('Adding Google sign-in listener');
         googleLoginBtn.addEventListener('click', async () => {
@@ -131,12 +151,11 @@ function initializeApp() {
                 googleLoginBtn.disabled = true;
                 googleLoginBtn.style.opacity = '0.7';
 
-                if (!firebaseInitialized) {
-                    throw new Error('Firebase not initialized');
-                }
-
                 // Create Google provider
                 const provider = new firebase.auth.GoogleAuthProvider();
+                provider.setCustomParameters({
+                    prompt: 'select_account'
+                });
                 
                 // Use popup for sign in
                 console.log('Attempting Google sign in with popup');
@@ -145,23 +164,48 @@ function initializeApp() {
                 
                 // Create or update user document in Firestore
                 if (result.user) {
-                    await firebase.firestore().collection('users').doc(result.user.uid).set({
-                        email: result.user.email,
-                        displayName: result.user.displayName || result.user.email.split('@')[0],
-                        photoURL: result.user.photoURL,
-                        lastLogin: new Date().toISOString()
-                    }, { merge: true });
+                    const userRef = firebase.firestore().collection('users').doc(result.user.uid);
+                    const userDoc = await userRef.get();
+                    
+                    if (!userDoc.exists) {
+                        // Create new user document
+                        await userRef.set({
+                            email: result.user.email,
+                            displayName: result.user.displayName || result.user.email.split('@')[0],
+                            photoURL: result.user.photoURL,
+                            createdAt: new Date().toISOString(),
+                            lastLogin: new Date().toISOString(),
+                            points: 0,
+                            progress: 0,
+                            completedLessons: 0,
+                            masteredSkills: 0,
+                            growingSkills: 0
+                        });
+                    } else {
+                        // Update existing user
+                        await userRef.update({
+                            lastLogin: new Date().toISOString()
+                        });
+                    }
                 }
 
-                // Redirect to dashboard on success
-                window.location.href = 'dashboard.html';
+                // Get redirect URL from session storage or default to dashboard
+                const redirectUrl = sessionStorage.getItem('redirectUrl') || 'dashboard.html';
+                sessionStorage.removeItem('redirectUrl'); // Clear the stored URL
+                window.location.href = redirectUrl;
+
             } catch (error) {
                 console.error('Google sign in error:', error);
+                
                 // Handle Google sign-in errors
                 let errorMessage = 'Failed to sign in with Google. Please try again.';
                 
                 if (error.code === 'auth/popup-closed-by-user') {
                     return; // User closed the popup, no need to show error
+                }
+                
+                if (error.code === 'auth/popup-blocked') {
+                    errorMessage = 'Popup was blocked. Please allow popups for this site.';
                 }
                 
                 showError(errorMessage);
@@ -171,16 +215,16 @@ function initializeApp() {
                 googleLoginBtn.style.opacity = '1';
             }
         });
-    } else {
-        console.error('Google sign-in button not found');
     }
 
     // Check if user is already signed in
     firebase.auth().onAuthStateChanged((user) => {
         console.log('Auth state changed:', user ? 'User signed in' : 'No user');
         if (user) {
-            // User is signed in, redirect to dashboard
-            window.location.href = 'dashboard.html';
+            // Get redirect URL from session storage or default to dashboard
+            const redirectUrl = sessionStorage.getItem('redirectUrl') || 'dashboard.html';
+            sessionStorage.removeItem('redirectUrl'); // Clear the stored URL
+            window.location.href = redirectUrl;
         }
     });
 }
@@ -202,7 +246,9 @@ function showError(message) {
 
     // Auto-remove error after 5 seconds
     setTimeout(() => {
-        errorDiv.remove();
+        if (errorDiv.parentNode) {
+            errorDiv.remove();
+        }
     }, 5000);
 }
 
@@ -232,3 +278,10 @@ style.textContent = `
     }
 `;
 document.head.appendChild(style);
+
+// Initialize app when document is ready
+if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initializeApp);
+} else {
+    initializeApp();
+}

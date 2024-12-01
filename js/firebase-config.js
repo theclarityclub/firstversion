@@ -10,10 +10,19 @@ const firebaseConfig = {
 };
 
 // Initialize Firebase
-if (!firebase.apps.length) {
-    firebase.initializeApp(firebaseConfig);
-}
+const app = firebase.initializeApp(firebaseConfig);
 
 // Initialize services and export them globally
 window.db = firebase.firestore();
-window.auth = firebase.auth();
+
+// Enable persistence for offline support
+window.db.enablePersistence()
+    .catch((err) => {
+        if (err.code == 'failed-precondition') {
+            // Multiple tabs open, persistence can only be enabled in one tab at a time
+            console.log('Persistence failed: Multiple tabs open');
+        } else if (err.code == 'unimplemented') {
+            // The current browser doesn't support persistence
+            console.log('Persistence not supported by browser');
+        }
+    });

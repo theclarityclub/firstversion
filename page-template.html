@@ -3,10 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Page Not Found - The Clarity Club</title>
+    <title>PAGE_TITLE - The Clarity Club</title>
     <link rel="stylesheet" href="css/variables.css">
     <link rel="stylesheet" href="css/styles.css">
-    <link rel="stylesheet" href="css/404.css">
+    <link rel="stylesheet" href="css/PAGE_CSS.css">
     <link rel="stylesheet" href="css/hamburger.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
@@ -14,28 +14,35 @@
     <nav class="site-nav">
         <div class="nav-progressive">
             <div class="nav-primary">
-                <a href="index.html" class="logo">
-                    <img src="images/logo.svg" alt="The Clarity Club Logo" class="logo-image">
-                </a>
+                <div class="nav-left">
+                    <a href="index.html" class="logo">
+                        <img src="images/logo.svg" alt="The Clarity Club Logo" class="logo-image">
+                    </a>
+                    <button class="hamburger-btn" aria-label="Toggle menu">
+                        <span class="hamburger-icon">☰</span>
+                    </button>
+                </div>
                 
                 <!-- Desktop Navigation -->
                 <div class="nav-links">
                     <a href="index.html">Home</a>
-                    <a href="about.html">About</a>
-                    <a href="membership.html">Membership</a>
-                    <a href="blog.html">Blog</a>
+                    <a href="login.html">Login</a>
                     <a href="events.html">Events</a>
-                    <a href="resources.html">Resources</a>
                     <a href="challenge.html">Challenge</a>
-                    <a href="progress.html">Progress</a>
-                    <a href="dashboard.html">Dashboard</a>
-                    <a href="contact.html">Contact</a>
                 </div>
             </div>
         </div>
     </nav>
 
-    <!-- Main content here -->
+    <!-- Hamburger Dropdown Menu -->
+    <div class="hamburger-dropdown">
+        <a href="index.html">Home</a>
+        <a href="login.html">Login</a>
+        <a href="events.html">Events</a>
+        <a href="challenge.html">Challenge</a>
+    </div>
+
+    <!-- PAGE_CONTENT -->
 
     <footer>
         <div class="container">
