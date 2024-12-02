@@ -1,300 +1,206 @@
 /* Membership Hero Section */
 .membership-hero {
     text-align: center;
-    padding: calc(var(--section-spacing) * 1.2) var(--content-padding);
-    background: var(--hero-gradient);
-    color: white;
-    position: relative;
-    overflow: hidden;
-}
-
-.membership-hero::before {
-    content: '';
-    position: absolute;
-    top: -50%;
-    left: -50%;
-    width: 200%;
-    height: 200%;
-    background: radial-gradient(circle, rgba(142, 84, 233, 0.1) 0%, transparent 50%);
-    animation: rotate 20s linear infinite;
+    padding: 4rem 2rem;
+    background: var(--color-background-alt);
 }
 
 .membership-hero h1 {
-    font-size: var(--h1);
-    margin-bottom: var(--space-3);
-    position: relative;
-    animation: fadeIn 1s var(--animation-timing);
-    background: linear-gradient(135deg, #fff, var(--primary-light));
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-}
-
-.membership-hero p {
-    font-size: var(--h3);
-    max-width: 600px;
-    margin: 0 auto;
-    position: relative;
-    animation: slideUp 1s var(--animation-timing);
-    color: var(--primary-light);
+    margin-bottom: 1rem;
 }
 
 /* Membership Plans Section */
 .membership-plans {
-    display: flex;
-    justify-content: center;
-    gap: var(--space-4);
-    padding: var(--section-spacing) var(--content-padding);
-    flex-wrap: wrap;
-    position: relative;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 2rem;
+    padding: 4rem 2rem;
+    max-width: 1200px;
+    margin: 0 auto;
 }
 
 .plan-card {
-    background: var(--card-gradient);
-    border-radius: var(--border-radius-xl);
-    padding: var(--space-4);
-    box-shadow: var(--shadow-lg);
-    width: 350px;
+    background: var(--color-background);
+    border-radius: var(--border-radius);
+    padding: 2rem;
+    text-align: center;
     position: relative;
-    transition: all var(--transition-normal);
-    border: 1px solid rgba(142, 84, 233, 0.1);
-    display: flex;
-    flex-direction: column;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
 .plan-card:hover {
-    transform: translateY(-8px);
-    box-shadow: var(--shadow-xl), var(--shadow-glow);
+    transform: translateY(-5px);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
 }
 
 .plan-card.featured {
-    border: 2px solid transparent;
-    background: linear-gradient(white, white) padding-box,
-                var(--accent-gradient) border-box;
-    transform: scale(1.05);
-}
-
-.plan-card.featured:hover {
-    transform: scale(1.05) translateY(-8px);
+    border: 2px solid var(--color-primary);
 }
 
 .featured-badge {
     position: absolute;
-    top: -15px;
-    right: 20px;
-    background: var(--accent-gradient);
+    top: 1rem;
+    right: 1rem;
+    background: var(--color-primary);
     color: white;
-    padding: var(--space-2) var(--space-3);
-    border-radius: var(--border-radius-xl);
-    font-size: var(--small);
-    font-family: var(--font-mono);
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-    box-shadow: var(--shadow-md);
+    padding: 0.5rem 1rem;
+    border-radius: var(--border-radius);
+    font-size: 0.9rem;
 }
 
 .plan-header {
-    margin-bottom: var(--space-3);
+    margin-bottom: 2rem;
 }
 
 .plan-title {
     display: flex;
     flex-direction: column;
-    gap: var(--space-1);
+    gap: 0.5rem;
 }
 
 .plan-level {
-    font-size: var(--h2);
+    font-size: 1.5rem;
     font-weight: bold;
-    background: var(--accent-gradient);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    line-height: 1.2;
+    color: var(--color-primary);
 }
 
 .plan-type {
-    font-size: var(--h3);
-    font-weight: bold;
-    background: var(--accent-gradient);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    line-height: 1.2;
+    font-size: 1rem;
+    color: var(--color-text-muted);
 }
 
 .price {
-    font-size: var(--h2);
+    font-size: 2.5rem;
     font-weight: bold;
-    color: var(--primary-dark);
-    margin-bottom: var(--space-4);
-    font-family: var(--font-mono);
+    margin: 1.5rem 0;
+    color: var(--color-text);
+    position: relative;
 }
 
 .price span {
-    font-size: var(--body);
-    color: var(--secondary-dark);
+    font-size: 1rem;
+    color: var(--color-text-muted);
+}
+
+.original-price {
+    font-size: 1.5rem;
+    text-decoration: line-through;
+    color: var(--color-text-muted);
+    display: block;
+    margin-bottom: 0.5rem;
+}
+
+.discount-badge {
+    background: var(--color-primary);
+    color: white;
+    padding: 0.5rem 1rem;
+    border-radius: var(--border-radius);
+    font-size: 0.9rem;
+    display: inline-block;
+    margin-top: 0.5rem;
+    animation: pulse 2s infinite;
 }
 
 .benefits {
     list-style: none;
     padding: 0;
-    margin-bottom: var(--space-4);
-    flex-grow: 1;
+    margin: 2rem 0;
 }
 
 .benefits li {
-    margin-bottom: var(--space-2);
-    padding-left: var(--space-4);
+    margin: 1rem 0;
+    color: var(--color-text);
     position: relative;
-    color: var(--secondary-dark);
+    padding-left: 1.5rem;
 }
 
 .benefits li::before {
-    content: "→";
+    content: '✓';
     position: absolute;
     left: 0;
-    color: var(--accent-purple);
-    font-family: var(--font-mono);
-    transition: transform var(--transition-normal);
-}
-
-.benefits li:hover::before {
-    transform: translateX(4px);
-}
-
-.plan-card .cta-primary {
-    width: 100%;
-    margin-top: auto;
+    color: var(--color-primary);
 }
 
 /* Membership Benefits Section */
 .membership-benefits {
-    background-color: white;
-    padding: var(--section-spacing) var(--content-padding);
-    text-align: center;
+    padding: 4rem 2rem;
+    background: var(--color-background-alt);
 }
 
 .benefits-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: var(--space-4);
-    max-width: var(--container-xl);
-    margin: var(--space-4) auto;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 2rem;
+    margin-top: 3rem;
 }
 
 .benefit-item {
-    padding: var(--space-4);
-    background: var(--card-gradient);
-    border-radius: var(--border-radius-lg);
-    box-shadow: var(--shadow-md);
-    border: 1px solid rgba(142, 84, 233, 0.1);
-    transition: all var(--transition-normal);
-}
-
-.benefit-item:hover {
-    transform: translateY(-4px);
-    box-shadow: var(--shadow-lg), var(--shadow-glow);
+    text-align: center;
+    padding: 2rem;
 }
 
 .benefit-item i {
-    font-size: var(--icon-size);
-    background: var(--accent-gradient);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    margin-bottom: var(--space-3);
-    display: block;
+    font-size: 2.5rem;
+    color: var(--color-primary);
+    margin-bottom: 1rem;
 }
 
 .benefit-item h3 {
-    color: var(--primary-dark);
-    margin-bottom: var(--space-2);
+    margin-bottom: 1rem;
 }
 
 /* Testimonials Section */
 .testimonials {
-    padding: var(--section-spacing) var(--content-padding);
-    text-align: center;
-    background-color: var(--neutral-light);
+    padding: 4rem 2rem;
 }
 
 .testimonial-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-    gap: var(--space-4);
-    max-width: var(--container-xl);
-    margin: var(--space-4) auto;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+    margin-top: 3rem;
 }
 
 .testimonial {
-    background: var(--card-gradient);
-    padding: var(--space-4);
-    border-radius: var(--border-radius-lg);
-    box-shadow: var(--shadow-md);
-    border: 1px solid rgba(142, 84, 233, 0.1);
-    transition: all var(--transition-normal);
-    text-align: left;
-}
-
-.testimonial:hover {
-    transform: translateY(-4px);
-    box-shadow: var(--shadow-lg), var(--shadow-glow);
+    background: var(--color-background);
+    padding: 2rem;
+    border-radius: var(--border-radius);
+    position: relative;
 }
 
 .testimonial i {
-    font-size: var(--h2);
-    background: var(--accent-gradient);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    margin-bottom: var(--space-3);
-    display: block;
+    color: var(--color-primary);
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
 }
 
 .testimonial p {
-    font-style: italic;
-    margin-bottom: var(--space-3);
-    color: var(--secondary-dark);
-    line-height: var(--leading-loose);
+    margin-bottom: 1.5rem;
 }
 
 .testimonial cite {
-    font-family: var(--font-mono);
     font-style: normal;
-    color: var(--accent-purple);
     font-weight: bold;
     display: block;
-    margin-top: var(--space-2);
 }
 
 .testimonial .role {
-    font-size: var(--small);
-    color: var(--secondary-dark);
-    font-family: var(--font-mono);
+    color: var(--color-text-muted);
+    font-size: 0.9rem;
+}
+
+/* Animations */
+@keyframes pulse {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.05); }
+    100% { transform: scale(1); }
 }
 
 /* Responsive Design */
 @media (max-width: 768px) {
     .membership-plans {
-        flex-direction: column;
-        align-items: center;
-    }
-
-    .plan-card {
-        width: 100%;
-        max-width: 400px;
-    }
-
-    .plan-card.featured {
-        transform: none;
-    }
-
-    .plan-card.featured:hover {
-        transform: translateY(-8px);
-    }
-
-    .membership-hero h1 {
-        font-size: calc(var(--h1) * 0.6);
-    }
-
-    .membership-hero p {
-        font-size: calc(var(--h3) * 0.8);
+        grid-template-columns: 1fr;
+        padding: 2rem 1rem;
     }
 
     .benefits-grid,

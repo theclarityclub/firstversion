@@ -27,7 +27,6 @@
                     <a href="events.html">Events</a>
                     <a href="resources.html">Resources</a>
                     <a href="challenge.html">Challenge</a>
-                    <a href="progress.html">Progress</a>
                     <a href="dashboard.html" class="active">Dashboard</a>
                     <a href="contact.html">Contact</a>
                 </div>
@@ -46,7 +45,23 @@
             <section class="dashboard-card growth-tree-card">
                 <h2><i class="fas fa-tree"></i> Your Growth Tree</h2>
                 <div class="growth-tree">
-                    <canvas id="treeCanvas"></canvas>
+                    <div class="tree-container">
+                        <canvas id="treeCanvas"></canvas>
+                        <div class="tree-legend">
+                            <div class="legend-item">
+                                <span class="legend-color social"></span>
+                                <span>Social Skills</span>
+                            </div>
+                            <div class="legend-item">
+                                <span class="legend-color emotional"></span>
+                                <span>Emotional Intelligence</span>
+                            </div>
+                            <div class="legend-item">
+                                <span class="legend-color communication"></span>
+                                <span>Communication</span>
+                            </div>
+                        </div>
+                    </div>
                     <div class="tree-stats">
                         <div class="tree-stat">
                             <i class="fas fa-leaf"></i>
@@ -87,6 +102,16 @@
                         <span class="points">0</span>
                         <span class="points-label">points</span>
                     </div>
+                    <div class="points-breakdown">
+                        <div class="streak-info">
+                            <span>Current Streak:</span>
+                            <span class="streak-days">0 days</span>
+                        </div>
+                        <div class="next-milestone">
+                            <span>Next Milestone:</span>
+                            <span class="milestone-points">100 points</span>
+                        </div>
+                    </div>
                 </div>
                 <div class="points-breakdown">
                     <h3>Today's Points</h3>
@@ -105,11 +130,13 @@
                         </li>
                     </ul>
                 </div>
-                <div class="rewards-progress">
-                    <p>250 points until next reward</p>
-                    <div class="progress-bar">
-                        <div class="progress" style="width: 0%"></div>
-                    </div>
+            </section>
+
+            <!-- Achievements Section -->
+            <section class="dashboard-card achievements-card">
+                <h2><i class="fas fa-trophy"></i> Recent Achievements</h2>
+                <div class="achievement-grid">
+                    <div class="achievement-placeholder">Complete your first lesson to unlock achievements</div>
                 </div>
             </section>
 
@@ -130,8 +157,11 @@
                         <p class="stat-value">0 hours</p>
                     </div>
                 </div>
-                <div class="progress-chart">
-                    <!-- Progress chart will be rendered here -->
+                <div class="progress-heatmap">
+                    <h3>Engagement Pattern</h3>
+                    <div class="heatmap-container">
+                        <div class="heatmap-placeholder">Start your journey to see your engagement pattern</div>
+                    </div>
                 </div>
             </section>
 
@@ -183,5 +213,7 @@
 
     <script src="js/hamburger.js"></script>
     <script src="js/main.js"></script>
+    <script src="js/dashboard.js"></script>
+    <script src="js/progress.js"></script>
 </body>
 </html>

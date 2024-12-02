@@ -1,14 +1,17 @@
 document.addEventListener('DOMContentLoaded', () => {
-    // Get plan details from URL parameters
+    // Get plan details and reward details from URL parameters
     const urlParams = new URLSearchParams(window.location.search);
     const planLevel = urlParams.get('plan');
     const planPrice = urlParams.get('price');
+    const rewardBadge = urlParams.get('rewardBadge');
+    const rewardValue = urlParams.get('rewardValue');
 
     // Plan configurations
     const planConfigs = {
         basic: {
             name: 'Basic Membership',
             price: '$9.99/month',
+            basePrice: 9.99,
             features: [
                 'Access to monthly workshops',
                 'Basic meditation resources',
@@ -19,6 +22,7 @@ document.addEventListener('DOMContentLoaded', () => {
         premium: {
             name: 'Premium Membership',
             price: '$19.99/month',
+            basePrice: 19.99,
             features: [
                 'All Basic benefits',
                 'Weekly group sessions',
@@ -30,6 +34,7 @@ document.addEventListener('DOMContentLoaded', () => {
         elite: {
             name: 'Elite Membership',
             price: '$39.99/month',
+            basePrice: 39.99,
             features: [
                 'All Premium benefits',
                 '1-on-1 coaching sessions',
@@ -41,11 +46,27 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     };
 
-    // Update page with plan details
+    // Update page with plan details and apply reward if available
     const selectedPlan = planConfigs[planLevel];
     if (selectedPlan) {
         document.getElementById('plan-name').textContent = selectedPlan.name;
-        document.getElementById('plan-price').textContent = selectedPlan.price;
+        
+        // Apply reward discount if available
+        if (rewardBadge && rewardValue) {
+            const discount = parseFloat(rewardValue) / 100;
+            const discountedPrice = selectedPlan.basePrice * (1 - discount);
+            const originalPriceElement = document.createElement('span');
+            originalPriceElement.className = 'original-price';
+            originalPriceElement.textContent = selectedPlan.price;
+            
+            document.getElementById('plan-price').innerHTML = '';
+            document.getElementById('plan-price').appendChild(originalPriceElement);
+            document.getElementById('plan-price').appendChild(document.createTextNode(
+                ` $${discountedPrice.toFixed(2)}/month (${rewardValue}% off)`
+            ));
+        } else {
+            document.getElementById('plan-price').textContent = selectedPlan.price;
+        }
         
         const featuresList = document.createElement('ul');
         selectedPlan.features.forEach(feature => {
@@ -81,6 +102,13 @@ document.addEventListener('DOMContentLoaded', () => {
             // Here you would typically process payment with Stripe/PayPal
             // For demo, we'll skip payment processing
 
+            // Calculate final price
+            let finalPrice = selectedPlan.basePrice;
+            if (rewardBadge && rewardValue) {
+                const discount = parseFloat(rewardValue) / 100;
+                finalPrice = finalPrice * (1 - discount);
+            }
+
             // If user is from challenge, get their data
             if (challengeEmail) {
                 const challengeDoc = await db.collection('challenge_participants').doc(challengeEmail).get();
@@ -99,7 +127,12 @@ document.addEventListener('DOMContentLoaded', () => {
                 name: name,
                 plan: planLevel,
                 createdAt: firebase.firestore.FieldValue.serverTimestamp(),
-                challengeCompleted: challengeData ? true : false
+                challengeCompleted: challengeData ? true : false,
+                appliedReward: rewardBadge ? {
+                    badge: rewardBadge,
+                    value: parseFloat(rewardValue),
+                    appliedAt: firebase.firestore.FieldValue.serverTimestamp()
+                } : null
             });
 
             // Create membership document
@@ -107,7 +140,12 @@ document.addEventListener('DOMContentLoaded', () => {
                 plan: planLevel,
                 startDate: firebase.firestore.FieldValue.serverTimestamp(),
                 status: 'active',
-                price: parseFloat(planPrice)
+                price: finalPrice,
+                originalPrice: selectedPlan.basePrice,
+                appliedDiscount: rewardBadge ? {
+                    badge: rewardBadge,
+                    value: parseFloat(rewardValue)
+                } : null
             });
 
             // If user came from challenge, transfer their progress
@@ -130,6 +168,15 @@ document.addEventListener('DOMContentLoaded', () => {
 
                 // Clear challenge email from localStorage
                 localStorage.removeItem('challengeEmail');
+            }
+
+            // If a reward was used, mark the badge as redeemed
+            if (rewardBadge) {
+                const userProgressRef = firebase.firestore().collection('users').doc(uid);
+                await userProgressRef.update({
+                    [`badges.${rewardBadge}.redeemed`]: true,
+                    [`badges.${rewardBadge}.redeemedAt`]: firebase.firestore.FieldValue.serverTimestamp()
+                });
             }
 
             // Show success message

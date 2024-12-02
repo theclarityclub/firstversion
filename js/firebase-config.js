@@ -14,6 +14,7 @@ const app = firebase.initializeApp(firebaseConfig);
 
 // Initialize services and export them globally
 window.db = firebase.firestore();
+window.auth = firebase.auth();
 
 // Enable persistence for offline support
 window.db.enablePersistence()

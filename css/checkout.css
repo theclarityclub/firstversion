@@ -1,10 +1,10 @@
 /* Checkout Page Styles */
 .checkout-container {
-    max-width: 1200px;
+    max-width: 800px;
     margin: 0 auto;
-    padding: var(--space-6);
+    padding: var(--space-4);
     display: grid;
-    grid-template-columns: 1fr 2fr;
+    grid-template-columns: minmax(224px, 1.5fr) 2fr;
     gap: var(--space-6);
     min-height: 80vh;
 }
@@ -12,23 +12,25 @@
 /* Order Summary Styles */
 .checkout-summary {
     background: white;
-    padding: var(--space-6);
+    padding: var(--space-4);
     border-radius: var(--border-radius-lg);
     box-shadow: var(--shadow-md);
     position: sticky;
     top: var(--space-4);
     height: fit-content;
+    min-width: 224px;
 }
 
 .checkout-summary h2 {
     color: var(--primary-dark);
-    margin-bottom: var(--space-4);
+    margin-bottom: var(--space-3);
     font-size: var(--h3);
+    font-weight: 600;
 }
 
 .selected-plan {
-    margin-bottom: var(--space-4);
-    padding-bottom: var(--space-4);
+    margin-bottom: var(--space-3);
+    padding-bottom: var(--space-3);
     border-bottom: 1px solid var(--border-color);
 }
 
@@ -40,13 +42,50 @@
 
 .selected-plan p {
     color: var(--accent-purple);
-    font-size: var(--h5);
+    font-size: var(--h4);
     font-weight: bold;
+}
+
+/* Loading States */
+.selected-plan h3#plan-name,
+.selected-plan p#plan-price,
+.plan-features#plan-features {
+    min-height: 24px;
+    position: relative;
+}
+
+.selected-plan h3#plan-name:empty,
+.selected-plan p#plan-price:empty,
+.plan-features#plan-features:empty {
+    background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+    background-size: 200% 100%;
+    animation: loading 1.5s infinite;
+    border-radius: var(--border-radius-sm);
+}
+
+.selected-plan h3#plan-name:empty {
+    height: 24px;
+    width: 80%;
+}
+
+.selected-plan p#plan-price:empty {
+    height: 20px;
+    width: 60%;
+}
+
+.plan-features#plan-features:empty {
+    height: 100px;
+}
+
+@keyframes loading {
+    0% { background-position: 200% 0; }
+    100% { background-position: -200% 0; }
 }
 
 .plan-features ul {
     list-style: none;
     padding: 0;
+    margin: var(--space-3) 0;
 }
 
 .plan-features li {
@@ -55,6 +94,8 @@
     display: flex;
     align-items: center;
     gap: var(--space-2);
+    font-size: var(--body);
+    line-height: 1.4;
 }
 
 .plan-features li::before {
@@ -66,58 +107,65 @@
 /* Form Styles */
 .checkout-form {
     background: white;
-    padding: var(--space-6);
+    padding: var(--space-4);
     border-radius: var(--border-radius-lg);
     box-shadow: var(--shadow-md);
+    max-width: 400px;
 }
 
 .checkout-form h2 {
     color: var(--primary-dark);
-    margin-bottom: var(--space-6);
+    margin-bottom: var(--space-4);
     font-size: var(--h3);
+    font-weight: 600;
 }
 
 .form-section {
-    margin-bottom: var(--space-6);
-    padding-bottom: var(--space-6);
+    margin-bottom: var(--space-4);
+    padding-bottom: var(--space-4);
     border-bottom: 1px solid var(--border-color);
 }
 
 .form-section h3 {
     color: var(--primary-dark);
-    margin-bottom: var(--space-4);
+    margin-bottom: var(--space-3);
     font-size: var(--h4);
+    font-weight: 600;
 }
 
 .form-group {
-    margin-bottom: var(--space-4);
+    margin-bottom: var(--space-3);
 }
 
 .form-row {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: var(--space-4);
+    gap: var(--space-3);
 }
 
 label {
     display: block;
-    margin-bottom: var(--space-2);
+    margin-bottom: var(--space-1);
     color: var(--text-dark);
     font-weight: 500;
+    font-size: 0.9rem;
 }
 
 input {
-    width: 100%;
-    padding: var(--space-3);
-    border: 2px solid var(--border-color);
+    width: 80%;
+    padding: var(--space-1) var(--space-2);
+    background-color: white;
+    border: 1px solid #ccc;
     border-radius: var(--border-radius-md);
-    font-size: var(--body);
+    font-size: 0.9rem;
+    color: var(--text-dark);
+    height: 32px;
     transition: all 0.3s ease;
 }
 
 input:focus {
     border-color: var(--primary-dark);
-    box-shadow: 0 0 0 3px rgba(var(--primary-dark-rgb), 0.1);
+    box-shadow: 0 0 0 2px rgba(var(--primary-dark-rgb), 0.1);
     outline: none;
 }
 
@@ -126,7 +174,8 @@ input:focus {
 }
 
 .input-with-icon input {
-    padding-right: var(--space-8);
+    width: 80%;
+    padding-right: var(--space-6);
 }
 
 .input-with-icon i {
@@ -145,11 +194,12 @@ input:focus {
 
 .form-error {
     color: var(--error);
-    margin-bottom: var(--space-4);
-    padding: var(--space-3);
+    margin-bottom: var(--space-3);
+    padding: var(--space-2);
     border-radius: var(--border-radius-md);
     background: rgba(var(--error-rgb), 0.1);
     display: none;
+    max-width: 320px;
 }
 
 .form-error.show {
@@ -159,11 +209,12 @@ input:focus {
 
 .form-success {
     color: var(--success);
-    margin-bottom: var(--space-4);
-    padding: var(--space-3);
+    margin-bottom: var(--space-3);
+    padding: var(--space-2);
     border-radius: var(--border-radius-md);
     background: rgba(var(--success-rgb), 0.1);
     display: none;
+    max-width: 320px;
 }
 
 .form-success.show {
@@ -173,8 +224,8 @@ input:focus {
 
 /* Button Styles */
 .cta-primary {
-    width: 100%;
-    padding: var(--space-4);
+    width: 80%;
+    padding: var(--space-2);
     background: linear-gradient(135deg, var(--primary-dark), var(--secondary-dark));
     color: white;
     border: none;
@@ -185,6 +236,7 @@ input:focus {
     transition: all 0.3s ease;
     position: relative;
     overflow: hidden;
+    height: 38px;
 }
 
 .cta-primary:hover {
@@ -200,8 +252,8 @@ input:focus {
 
 .button-loader {
     display: none;
-    width: 20px;
-    height: 20px;
+    width: 18px;
+    height: 18px;
     border: 2px solid rgba(255,255,255,0.3);
     border-radius: 50%;
     border-top-color: white;
@@ -242,15 +294,22 @@ input:focus {
 @media (max-width: 768px) {
     .checkout-container {
         grid-template-columns: 1fr;
+        gap: var(--space-4);
     }
 
     .checkout-summary {
         position: relative;
         top: 0;
+        min-width: unset;
     }
 
     .form-row {
         grid-template-columns: 1fr;
+        gap: var(--space-2);
+    }
+
+    input, .cta-primary {
+        width: 100%;
     }
 }
 
@@ -277,9 +336,9 @@ input:focus {
 }
 
 .loading-spinner {
-    width: 50px;
-    height: 50px;
-    border: 4px solid rgba(var(--primary-dark-rgb), 0.1);
+    width: 40px;
+    height: 40px;
+    border: 3px solid rgba(var(--primary-dark-rgb), 0.1);
     border-radius: 50%;
     border-top-color: var(--primary-dark);
     animation: spin 1s linear infinite;
@@ -292,7 +351,7 @@ input:invalid {
 
 input:invalid:focus {
     border-color: var(--error);
-    box-shadow: 0 0 0 3px rgba(var(--error-rgb), 0.1);
+    box-shadow: 0 0 0 2px rgba(var(--error-rgb), 0.1);
 }
 
 .validation-message {
@@ -300,6 +359,7 @@ input:invalid:focus {
     font-size: var(--small);
     color: var(--error);
     margin-top: var(--space-1);
+    max-width: 320px;
 }
 
 input:invalid + .validation-message {
@@ -309,11 +369,12 @@ input:invalid + .validation-message {
 
 /* Password Strength Indicator */
 .password-strength {
-    height: 4px;
+    height: 3px;
     background: var(--border-color);
     border-radius: var(--border-radius-full);
     margin-top: var(--space-2);
     overflow: hidden;
+    max-width: 320px;
 }
 
 .password-strength-bar {

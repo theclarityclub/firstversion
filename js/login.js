@@ -45,7 +45,7 @@ function initializeApp() {
 
         try {
             // Set persistence first
-            await firebase.auth().setPersistence(persistence);
+            await auth.setPersistence(persistence);
 
             // Show loading state
             submitBtn.disabled = true;
@@ -54,7 +54,7 @@ function initializeApp() {
             try {
                 // First try to sign in
                 console.log('Attempting email/password sign in');
-                await firebase.auth().signInWithEmailAndPassword(email, password);
+                await auth.signInWithEmailAndPassword(email, password);
                 console.log('Sign in successful');
             } catch (signInError) {
                 console.log('Sign in error:', signInError.code);
@@ -65,11 +65,11 @@ function initializeApp() {
                     submitBtn.textContent = 'Creating account...';
                     
                     // Create new user
-                    const userCredential = await firebase.auth().createUserWithEmailAndPassword(email, password);
+                    const userCredential = await auth.createUserWithEmailAndPassword(email, password);
                     console.log('Account created successfully');
                     
                     // Create initial user document in Firestore
-                    await firebase.firestore().collection('users').doc(userCredential.user.uid).set({
+                    await db.collection('users').doc(userCredential.user.uid).set({
                         email: email,
                         displayName: email.split('@')[0],
                         createdAt: new Date().toISOString(),
@@ -89,8 +89,8 @@ function initializeApp() {
             }
             
             // Update last login time
-            if (firebase.auth().currentUser) {
-                await firebase.firestore().collection('users').doc(firebase.auth().currentUser.uid).update({
+            if (auth.currentUser) {
+                await db.collection('users').doc(auth.currentUser.uid).update({
                     lastLogin: new Date().toISOString()
                 });
             }
@@ -159,12 +159,12 @@ function initializeApp() {
                 
                 // Use popup for sign in
                 console.log('Attempting Google sign in with popup');
-                const result = await firebase.auth().signInWithPopup(provider);
+                const result = await auth.signInWithPopup(provider);
                 console.log('Google sign in successful');
                 
                 // Create or update user document in Firestore
                 if (result.user) {
-                    const userRef = firebase.firestore().collection('users').doc(result.user.uid);
+                    const userRef = db.collection('users').doc(result.user.uid);
                     const userDoc = await userRef.get();
                     
                     if (!userDoc.exists) {
@@ -218,7 +218,7 @@ function initializeApp() {
     }
 
     // Check if user is already signed in
-    firebase.auth().onAuthStateChanged((user) => {
+    auth.onAuthStateChanged((user) => {
         console.log('Auth state changed:', user ? 'User signed in' : 'No user');
         if (user) {
             // Get redirect URL from session storage or default to dashboard

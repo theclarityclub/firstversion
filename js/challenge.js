@@ -2,6 +2,54 @@
 document.addEventListener('DOMContentLoaded', () => {
     console.log('Challenge script loaded');
 
+    // Badge configurations with rewards
+    const badgeConfigs = {
+        firstConnection: {
+            name: 'First Connection',
+            description: 'Complete your first day',
+            unlockDay: 1,
+            reward: {
+                type: 'discount',
+                value: 5,
+                duration: 3,
+                description: '5% off any membership for 3 months'
+            }
+        },
+        socialButterfly: {
+            name: 'Social Butterfly',
+            description: 'Complete 10 days of challenges',
+            unlockDay: 10,
+            reward: {
+                type: 'free',
+                plan: 'basic',
+                duration: 1,
+                description: '1 month basic membership free'
+            }
+        },
+        confidenceChampion: {
+            name: 'Confidence Champion',
+            description: 'Complete 20 days of challenges',
+            unlockDay: 20,
+            reward: {
+                type: 'discount',
+                value: 20,
+                duration: 3,
+                description: '20% off any membership for 3 months'
+            }
+        },
+        masterAchiever: {
+            name: 'Master Achiever',
+            description: 'Complete all 30 days',
+            unlockDay: 30,
+            reward: {
+                type: 'free',
+                plan: 'premium',
+                duration: 1,
+                description: '1 month premium membership free'
+            }
+        }
+    };
+
     // Cache DOM elements for performance
     const elements = {
         emailInput: document.getElementById('emailInput'),
@@ -13,15 +61,56 @@ document.addEventListener('DOMContentLoaded', () => {
         dayGrid: document.getElementById('dayGrid'),
         taskTitle: document.getElementById('taskTitle'),
         taskDescription: document.getElementById('taskDescription'),
-        completeButton: document.getElementById('completeTask')
+        completeButton: document.getElementById('completeTask'),
+        badgeItems: document.querySelectorAll('.badge-item')
     };
 
-    console.log('Elements found:', {
-        emailInput: !!elements.emailInput,
-        submitEmail: !!elements.submitEmail,
-        emailError: !!elements.emailError,
-        emailSuccess: !!elements.emailSuccess
-    });
+    // Initialize badge click handlers
+    function initializeBadgeHandlers(userData) {
+        elements.badgeItems.forEach(badge => {
+            const badgeId = badge.dataset.badge;
+            const badgeConfig = badgeConfigs[badgeId];
+            const isUnlocked = userData.completedDays && userData.completedDays.length >= badgeConfig.unlockDay;
+            
+            if (isUnlocked) {
+                badge.classList.add('unlocked');
+                badge.addEventListener('click', () => {
+                    redirectToMembershipWithReward(badgeId, badgeConfig.reward);
+                });
+            } else {
+                badge.classList.add('locked');
+            }
+
+            // Update unlock text
+            const unlockText = badge.querySelector('.unlock-text');
+            if (unlockText) {
+                if (isUnlocked) {
+                    unlockText.textContent = 'Click to redeem reward';
+                    unlockText.classList.add('unlocked');
+                } else {
+                    unlockText.textContent = `Unlocks on Day ${badgeConfig.unlockDay}`;
+                }
+            }
+        });
+    }
+
+    // Redirect to membership page with reward
+    function redirectToMembershipWithReward(badgeId, reward) {
+        const params = new URLSearchParams();
+        params.append('rewardBadge', badgeId);
+        
+        if (reward.type === 'discount') {
+            params.append('rewardType', 'discount');
+            params.append('rewardValue', reward.value);
+            params.append('rewardDuration', reward.duration);
+        } else if (reward.type === 'free') {
+            params.append('rewardType', 'free');
+            params.append('rewardPlan', reward.plan);
+            params.append('rewardDuration', reward.duration);
+        }
+
+        window.location.href = `membership.html?${params.toString()}`;
+    }
 
     // Email validation function
     function isValidEmail(email) {
@@ -281,6 +370,7 @@ document.addEventListener('DOMContentLoaded', () => {
                         updateProgress(data.completedDays || []);
                         updateDayGrid(data.currentDay || 1, data.completedDays || []);
                         updateTask(data.currentDay || 1);
+                        initializeBadgeHandlers(data);
                     }
                 }).catch(error => {
                     console.error('Error loading dashboard:', error);
@@ -339,6 +429,12 @@ document.addEventListener('DOMContentLoaded', () => {
                         });
                         
                         console.log('Progress updated successfully');
+                        
+                        // Reinitialize badge handlers with updated data
+                        const updatedDoc = await docRef.get();
+                        if (updatedDoc.exists) {
+                            initializeBadgeHandlers(updatedDoc.data());
+                        }
                         
                         setTimeout(() => {
                             elements.completeButton.disabled = false;
